@@ -33,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQ5-eb-vNg">
-                                <rect key="frame" x="16" y="169" width="161" height="30"/>
+                                <rect key="frame" x="16" y="169" width="112" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Connect"/>
                                 <connections>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3I1-QM-26P">
-                                <rect key="frame" x="233" y="169" width="161" height="30"/>
+                                <rect key="frame" x="153" y="169" width="108" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
@@ -69,6 +69,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6NL-9i-TFJ">
+                                <rect key="frame" x="286" y="169" width="108" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Export"/>
+                                <connections>
+                                    <action selector="ExportPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H38-zU-ZDG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -78,6 +86,7 @@
                         <outlet property="ConnectButton" destination="LQ5-eb-vNg" id="y8v-VD-ubU"/>
                         <outlet property="DataTextView" destination="5R1-HE-Zsu" id="6ab-iN-QZQ"/>
                         <outlet property="DurationLabel" destination="2Rx-yL-8eO" id="Gyl-jm-bWS"/>
+                        <outlet property="ExportButton" destination="6NL-9i-TFJ" id="Wni-Bn-064"/>
                         <outlet property="IPTextField" destination="CJe-wv-Neu" id="fmJ-Ex-ypt"/>
                         <outlet property="StartStopButton" destination="3I1-QM-26P" id="S4f-gv-6iq"/>
                         <outlet property="StatusLabel" destination="Hwi-52-kdj" id="t4K-SG-hEY"/>

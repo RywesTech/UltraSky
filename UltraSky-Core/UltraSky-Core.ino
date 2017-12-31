@@ -1,3 +1,4 @@
+#include <Wire.h>
 #include <SPI.h>
 #include <WiFi.h>
 #include "SparkFunCCS811.h"
