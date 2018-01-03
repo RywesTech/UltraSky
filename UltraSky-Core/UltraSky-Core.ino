@@ -1,5 +1,6 @@
 #include <Wire.h>
 #include <SPI.h>
+#include <SD.h>
 #include <WiFi.h>
 #include "SparkFunCCS811.h"
 
@@ -10,6 +11,7 @@ char pass[] = "sailboat70";   // your network password
 
 int status = WL_IDLE_STATUS;
 int CO2Level, TVOCLevel;
+const int SDChipSelect = 8;
 
 WiFiServer server(9440);
 CCS811 CO2Sensor(CCS811_ADDR);
@@ -19,20 +21,22 @@ void setup() {
 
   CCS811Core::status returnCode = CO2Sensor.begin();
   if (returnCode != CCS811Core::SENSOR_SUCCESS) {
-    Serial.println("CO2Sensor.begin() returned with an error.");
+    Serial.println("ERROR: CO2Sensor.begin() returned with an error.");
     while (true); //Hang if there was a problem.
   }
+  Serial.println("SUCCESS: Sensor connected");
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
-    Serial.println("WiFi shield not present");
+    Serial.println("ERROR: WiFi shield not present");
     // don't continue:
     while (true);
   }
+  Serial.println("SUCCESS: WiFi chip connectiom");
 
   String fv = WiFi.firmwareVersion();
   if ( fv != "1.1.0" )
-    Serial.println("Please upgrade the firmware");
+    Serial.println("ERROR: Please upgrade the firmware");
 
   // attempt to connect to Wifi network:
   while ( status != WL_CONNECTED) {
@@ -47,6 +51,23 @@ void setup() {
   server.begin();
   // you're connected now, so print out the status:
   printWifiStatus();
+
+  // see if the card is present and can be initialized:
+  if (!SD.begin(SD_CS)) {
+    Serial.println("ERROR: Card failed, or not present");
+    // don't do anything more:
+    return;
+  }
+  Serial.println("SUCCESS: SD card initialized.");
+
+  File dataFile = SD.open("UltraSky_Datalog.txt", FILE_WRITE);
+  if (dataFile) {
+    dataFile.println("TESTING");
+    dataFile.close();
+    Serial.println("SUCCESS: Wrote to SD Card");
+  } else {
+    Serial.println("ERROR: opening datalog.txt");
+  }
 }
 
 
@@ -129,5 +150,7 @@ void printWifiStatus() {
   Serial.print("signal strength (RSSI):");
   Serial.print(rssi);
   Serial.println(" dBm");
+
+  Serial.println("SUCCESS: WiFi network connected");
 }
 
