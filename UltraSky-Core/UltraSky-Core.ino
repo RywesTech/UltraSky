@@ -11,7 +11,7 @@ char pass[] = "sailboat70";   // your network password
 
 int status = WL_IDLE_STATUS;
 int CO2Level, TVOCLevel;
-const int SDChipSelect = 8;
+const int SD_CS = 4;
 
 WiFiServer server(9440);
 CCS811 CO2Sensor(CCS811_ADDR);
@@ -21,26 +21,43 @@ void setup() {
 
   CCS811Core::status returnCode = CO2Sensor.begin();
   if (returnCode != CCS811Core::SENSOR_SUCCESS) {
-    Serial.println("ERROR: CO2Sensor.begin() returned with an error.");
+    Serial.println("ERROR 001");
     while (true); //Hang if there was a problem.
   }
-  Serial.println("SUCCESS: Sensor connected");
+  Serial.println(F("SUCCESS: Sensor connected"));
+
+  // see if the card is present and can be initialized:
+  if (!SD.begin(SD_CS)) {
+    Serial.println("ERROR: 002");
+    // don't do anything more:
+    //return;
+  }
+  Serial.println(F("SUCCESS: SD card connected"));
+
+  File dataFile = SD.open("UltraSky_Datalog.txt", FILE_WRITE);
+  if (dataFile) {
+    dataFile.println("TESTING");
+    dataFile.close();
+    Serial.println(F("SUCCESS: Wrote to SD Card"));
+  } else {
+    Serial.println("ERROR: 003");
+  }
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
-    Serial.println("ERROR: WiFi shield not present");
+    Serial.println("ERROR: 004");
     // don't continue:
     while (true);
   }
-  Serial.println("SUCCESS: WiFi chip connectiom");
+  Serial.println(F("SUCCESS: WiFi shield connected"));
 
   String fv = WiFi.firmwareVersion();
   if ( fv != "1.1.0" )
-    Serial.println("ERROR: Please upgrade the firmware");
+    Serial.println("ERROR: upgrade firmware");
 
   // attempt to connect to Wifi network:
   while ( status != WL_CONNECTED) {
-    Serial.print("Attempting to connect to SSID: ");
+    Serial.print(F("Connecting to SSID: "));
     Serial.println(ssid);
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     status = WiFi.begin(ssid, pass);
@@ -51,23 +68,6 @@ void setup() {
   server.begin();
   // you're connected now, so print out the status:
   printWifiStatus();
-
-  // see if the card is present and can be initialized:
-  if (!SD.begin(SD_CS)) {
-    Serial.println("ERROR: Card failed, or not present");
-    // don't do anything more:
-    return;
-  }
-  Serial.println("SUCCESS: SD card initialized.");
-
-  File dataFile = SD.open("UltraSky_Datalog.txt", FILE_WRITE);
-  if (dataFile) {
-    dataFile.println("TESTING");
-    dataFile.close();
-    Serial.println("SUCCESS: Wrote to SD Card");
-  } else {
-    Serial.println("ERROR: opening datalog.txt");
-  }
 }
 
 
@@ -76,7 +76,7 @@ void loop() {
   WiFiClient client = server.available();
   
   if (client) {
-    Serial.println("new client");
+    //Serial.println("new client");
     // an http request ends with a blank line
     boolean currentLineIsBlank = true;
     while (client.connected()) {
@@ -112,7 +112,7 @@ void loop() {
 
     // close the connection:
     client.stop();
-    Serial.println("client disonnected");
+    //Serial.println("client disonnected");
   }
 
   // Update levels every time we get new data:
@@ -122,7 +122,7 @@ void loop() {
 
     CO2Level = CO2Sensor.getCO2();
     TVOCLevel = CO2Sensor.getTVOC();
-
+    /*
     Serial.print("CO2[");
     Serial.print(CO2Level);
     Serial.print("] tVOC[");
@@ -130,12 +130,14 @@ void loop() {
     Serial.print("] millis[");
     Serial.print(millis());
     Serial.print("]");
-    Serial.println();
+    Serial.println();*/
+    Serial.println("got data");
   } 
 }
 
 
 void printWifiStatus() {
+  /*
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
@@ -152,5 +154,6 @@ void printWifiStatus() {
   Serial.println(" dBm");
 
   Serial.println("SUCCESS: WiFi network connected");
+  */
 }
 
