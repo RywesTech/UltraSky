@@ -17,6 +17,10 @@ WiFiServer server(9440);
 CCS811 CO2Sensor(CCS811_ADDR);
 
 void setup() {
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  analogWrite(5, 100);
+  analogWrite(6, 255);
   Serial.begin(9600);
 
   CCS811Core::status returnCode = CO2Sensor.begin();
