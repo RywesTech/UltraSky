@@ -28,9 +28,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     var lon: Double = 0.0
     var lat: Double = 0.0
     var alt: Double = 0.0
+    var temp = 0.0
+    var pressure = 0.0
     var CO2Level = 0
     var TVOCLevel = 0
     var millis = 0
+    var freeRam = 0
     var readEvery = TimeInterval(1) // Get new data every second
     var gotLastReading = true
     
@@ -41,7 +44,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         StartStopButton.isEnabled = false
         ExportButton.isEnabled = false
         
-        log += "millis,CO2,TVOC,lat,lon,alt\n"
+        log += "millis,CO2,TVOC,pressure,temp,lat,lon,alt,freeRam\n"
         
         // Ask for Authorisation from the User.
         locationManager.delegate = self
@@ -114,6 +117,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
                         if let json = jsonSerialized {
                             self.CO2Level = json["CO2Level"] as! Int
                             self.TVOCLevel = json["TVOCLevel"] as! Int
+                            self.alt = json["altitude"] as! Double
+                            self.temp = json["temp"] as! Double
+                            self.pressure = json["pressure"] as! Double
+                            self.freeRam = json["freeRam"] as! Int
                             self.millis = json["millis"] as! Int
                             DispatchQueue.main.async {
                                 print("CO2 Level: \(self.CO2Level)")
@@ -121,7 +128,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
                                 self.StatusLabel.text = "Status: Running"
                                 self.DurationLabel.text = "Duration: \(self.millis/1000) seconds"
                                 
-                                let addToLog = "\(self.millis),\(self.CO2Level),\(self.TVOCLevel),\(self.lat),\(self.lon),\(self.alt)"
+                                let addToLog = "\(self.millis),\(self.CO2Level),\(self.TVOCLevel),\(self.pressure),\(self.temp),\(self.lat),\(self.lon),\(self.alt),\(self.freeRam)"
                                 self.log += "\(addToLog)\n"
                                 self.DataTextView.text = self.log
                                 self.DataTextView.scrollToBotom()
@@ -199,7 +206,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         let locValue: CLLocationCoordinate2D = manager.location!.coordinate
         lat = locValue.latitude
         lon = locValue.longitude
-        alt = (manager.location?.altitude)!
         //print("Got new lat, lon = \(lat), \(lon)")
     }
     

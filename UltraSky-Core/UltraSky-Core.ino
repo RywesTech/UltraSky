@@ -3,22 +3,29 @@
 //#include <SD.h>
 #include <WiFi.h>
 #include "SparkFunCCS811.h"
+#include <Adafruit_BMP085.h>
 
 #define CCS811_ADDR 0x5B //Default I2C Address
 
-char ssid[] = "Ryan's iPhone";      // your network SSID (name)
-char pass[] = "sailboat70";   // your network password
+char ssid[] = "Ryan's iPhone"; // network SSID
+char pass[] = "sailboat70";    // network password
 
 int status = WL_IDLE_STATUS;
-int CO2Level, TVOCLevel; //CO2 in ppm (?) and TVOC in ____ (?)
-float pm25; //2.5um particles detected in ug/m3
-float pm10; //10um particles detected in ug/m3
+
+float CO2Level, TVOCLevel; //CO2 in ppm and TVOC in ppb
+float pm25;                //2.5um particles detected in ug/m3
+float pm10;                //10um particles detected in ug/m3
+float ambientTemp = 0;
+float pressure = 0;
+float alt = 0;
+
 const int SD_CS = 4;
-long previousMillis = 0; // for i2c updates
-long interval = 1000; // i2c request interval
+long previousMillis = 0;   // for i2c updates
+long interval = 1000;      // i2c request interval
 
 WiFiServer server(9440);
 CCS811 CO2Sensor(CCS811_ADDR);
+Adafruit_BMP085 bmp;
 
 void setup() {
   pinMode(5, OUTPUT); // Red
@@ -55,6 +62,12 @@ void setup() {
     //modeError();
   }*/
 
+  if (!bmp.begin()) {
+    Serial.println("ERROR: 002");
+    modeError();
+    while(true);
+  }
+
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
     Serial.println("ERROR: 004");
@@ -73,7 +86,6 @@ void setup() {
   while ( status != WL_CONNECTED) {
     Serial.print(F("Connecting to SSID: "));
     Serial.println(ssid);
-    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     status = WiFi.begin(ssid, pass);
 
     // wait 5 seconds for connection:
@@ -91,7 +103,6 @@ void loop() {
   WiFiClient client = server.available();
   
   if (client) {
-    //Serial.println("new client");
     // an http request ends with a blank line
     boolean currentLineIsBlank = true;
     while (client.connected()) {
@@ -107,7 +118,11 @@ void loop() {
           client.println("\"status\":\"good\",");
           client.println("\"CO2Level\":" + String(CO2Level) + ",");
           client.println("\"TVOCLevel\":" + String(TVOCLevel) + ",");
-          client.println("\"millis\":" + String(millis()) + ",");
+          client.println("\"temp\":" + String(ambientTemp) + ",");
+          client.println("\"pressure\":" + String(pressure) + ",");
+          client.println("\"altitude\":" + String(alt) + ",");
+          client.println("\"freeRam\":" + String(freeRam()) + ",");
+          client.println("\"millis\":" + String(millis()));
           client.println("}");
           
           break;
@@ -122,12 +137,11 @@ void loop() {
         }
       }
     }
-    // give the web browser time to receive the data
+    // give the client time to receive the data
     delay(1);
 
     // close the connection:
     client.stop();
-    //Serial.println("client disonnected");
   }
 
   // Update levels every time we get new data:
@@ -137,16 +151,12 @@ void loop() {
 
     CO2Level = CO2Sensor.getCO2();
     TVOCLevel = CO2Sensor.getTVOC();
-    /*
-    Serial.print("CO2[");
-    Serial.print(CO2Level);
-    Serial.print("] tVOC[");
-    Serial.print(TVOCLevel);
-    Serial.print("] millis[");
-    Serial.print(millis());
-    Serial.print("]");
-    Serial.println();*/
-    Serial.println("got data");
+
+    ambientTemp = bmp.readTemperature();
+    pressure = bmp.readPressure();
+    alt = bmp.readAltitude();
+    
+    Serial.println(F("Got new data"));
   }
 
   unsigned long currentMillis = millis();
@@ -166,25 +176,29 @@ void loop() {
   modeGood();
 }
 
+int freeRam () {
+  extern int __heap_start, *__brkval; 
+  int v; 
+  return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval); 
+}
+
 
 void printWifiStatus() {
-  /*
   // print the SSID of the network you're attached to:
-  Serial.print("SSID: ");
+  Serial.print(F("SSID: "));
   Serial.println(WiFi.SSID());
 
   // print your WiFi shield's IP address:
   IPAddress ip = WiFi.localIP();
-  Serial.print("IP Address: ");
+  Serial.print(F("IP Address: "));
   Serial.println(ip);
 
   // print the received signal strength:
+  /*
   long rssi = WiFi.RSSI();
-  Serial.print("signal strength (RSSI):");
+  Serial.print(F("signal strength (RSSI):"));
   Serial.print(rssi);
-  Serial.println(" dBm");
-
-  Serial.println("SUCCESS: WiFi network connected");
+  Serial.println(F(" dBm"));
   */
 }
 
