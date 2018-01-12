@@ -27,6 +27,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
     var timer = Timer()
     var lon: Double = 0.0
     var lat: Double = 0.0
+    var alt: Double = 0.0
     var CO2Level = 0
     var TVOCLevel = 0
     var millis = 0
@@ -40,7 +41,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         StartStopButton.isEnabled = false
         ExportButton.isEnabled = false
         
-        log += "millis,CO2,TVOC,lat,lon\n"
+        log += "millis,CO2,TVOC,lat,lon,alt\n"
         
         // Ask for Authorisation from the User.
         locationManager.delegate = self
@@ -120,7 +121,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
                                 self.StatusLabel.text = "Status: Running"
                                 self.DurationLabel.text = "Duration: \(self.millis/1000) seconds"
                                 
-                                let addToLog = "\(self.millis),\(self.CO2Level),\(self.TVOCLevel),\(self.lat),\(self.lon)"
+                                let addToLog = "\(self.millis),\(self.CO2Level),\(self.TVOCLevel),\(self.lat),\(self.lon),\(self.alt)"
                                 self.log += "\(addToLog)\n"
                                 self.DataTextView.text = self.log
                                 self.DataTextView.scrollToBotom()
@@ -198,6 +199,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MFMailCompose
         let locValue: CLLocationCoordinate2D = manager.location!.coordinate
         lat = locValue.latitude
         lon = locValue.longitude
+        alt = (manager.location?.altitude)!
         //print("Got new lat, lon = \(lat), \(lon)")
     }
     

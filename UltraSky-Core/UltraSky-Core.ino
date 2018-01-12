@@ -10,28 +10,35 @@ char ssid[] = "Ryan's iPhone";      // your network SSID (name)
 char pass[] = "sailboat70";   // your network password
 
 int status = WL_IDLE_STATUS;
-int CO2Level, TVOCLevel;
+int CO2Level, TVOCLevel; //CO2 in ppm (?) and TVOC in ____ (?)
+float pm25; //2.5um particles detected in ug/m3
+float pm10; //10um particles detected in ug/m3
 const int SD_CS = 4;
+long previousMillis = 0; // for i2c updates
+long interval = 1000; // i2c request interval
 
 WiFiServer server(9440);
 CCS811 CO2Sensor(CCS811_ADDR);
 
 void setup() {
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
-  analogWrite(5, 100);
-  analogWrite(6, 255);
+  pinMode(5, OUTPUT); // Red
+  pinMode(6, OUTPUT); // Blue
+  modeBoot();
+  
   Serial.begin(9600);
+  Wire.begin();
 
   CCS811Core::status returnCode = CO2Sensor.begin();
   if (returnCode != CCS811Core::SENSOR_SUCCESS) {
     Serial.println("ERROR 001");
+    modeError();
     while (true); //Hang if there was a problem.
   }
-  Serial.println(F("SUCCESS: Sensor connected"));
+  Serial.println(F("SUCCESS: Sensors connected"));
 
   // see if the card is present and can be initialized:
   if (!SD.begin(SD_CS)) {
+    //modeError();
     Serial.println("ERROR: 002");
     // don't do anything more:
     //return;
@@ -45,11 +52,13 @@ void setup() {
     Serial.println(F("SUCCESS: Wrote to SD Card"));
   } else {
     Serial.println("ERROR: 003");
+    //modeError();
   }
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
     Serial.println("ERROR: 004");
+    modeError();
     // don't continue:
     while (true);
   }
@@ -58,6 +67,7 @@ void setup() {
   String fv = WiFi.firmwareVersion();
   if ( fv != "1.1.0" )
     Serial.println("ERROR: upgrade firmware");
+    modeError();
 
   // attempt to connect to Wifi network:
   while ( status != WL_CONNECTED) {
@@ -70,6 +80,8 @@ void setup() {
     delay(5000);
   }
   server.begin();
+
+  WiFi.setAutoReconnect(true);
   // you're connected now, so print out the status:
   printWifiStatus();
 }
@@ -136,7 +148,23 @@ void loop() {
     Serial.print("]");
     Serial.println();*/
     Serial.println("got data");
-  } 
+  }
+
+  unsigned long currentMillis = millis();
+ /*
+  if(currentMillis - previousMillis > interval) {
+    previousMillis = currentMillis; 
+    Serial.println(F("Requesting data..."));
+    Wire.requestFrom(2, 60);    // request 6 bytes from slave device #8
+
+    while (Wire.available()) {  // slave may send less than requested
+      char c = Wire.read(); // receive a byte as character
+      Serial.print(c);         // print the character
+    }
+    Serial.println();
+  }*/
+  
+  modeGood();
 }
 
 
@@ -159,5 +187,38 @@ void printWifiStatus() {
 
   Serial.println("SUCCESS: WiFi network connected");
   */
+}
+
+void modeBoot() {
+  analogWrite(5, 0);
+  analogWrite(6, 255);
+  delay(300);
+  analogWrite(5, 255);
+  analogWrite(6, 0);
+  delay(300);
+  analogWrite(5, 0);
+  analogWrite(6, 255);
+  delay(300);
+  analogWrite(5, 255);
+  analogWrite(6, 0);
+  delay(300);
+  analogWrite(5, 0);
+  analogWrite(6, 255);
+  delay(300);
+  analogWrite(5, 255);
+  analogWrite(6, 0);
+  delay(300);
+  analogWrite(5, 0);
+  analogWrite(6, 255);
+}
+
+void modeError(){
+  analogWrite(6, 0);
+  analogWrite(5, 255);
+}
+
+void modeGood(){
+  analogWrite(6, 255);
+  analogWrite(5, 0);
 }
 
