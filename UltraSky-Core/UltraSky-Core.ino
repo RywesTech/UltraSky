@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <SPI.h>
-#include <SD.h>
+//#include <SD.h>
 #include <WiFi.h>
 #include "SparkFunCCS811.h"
 
@@ -35,7 +35,7 @@ void setup() {
     while (true); //Hang if there was a problem.
   }
   Serial.println(F("SUCCESS: Sensors connected"));
-
+  /*
   // see if the card is present and can be initialized:
   if (!SD.begin(SD_CS)) {
     //modeError();
@@ -53,7 +53,7 @@ void setup() {
   } else {
     Serial.println("ERROR: 003");
     //modeError();
-  }
+  }*/
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
@@ -80,8 +80,7 @@ void setup() {
     delay(5000);
   }
   server.begin();
-
-  WiFi.setAutoReconnect(true);
+  
   // you're connected now, so print out the status:
   printWifiStatus();
 }
