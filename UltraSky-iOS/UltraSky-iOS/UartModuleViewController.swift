@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import MapKit
 import MessageUI
+import CoreLocation
 import CoreBluetooth
 
-class UartModuleViewController: UIViewController, CBPeripheralManagerDelegate, UITextViewDelegate, UITextFieldDelegate, MFMailComposeViewControllerDelegate {
+class UartModuleViewController: UIViewController, CBPeripheralManagerDelegate, UITextViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate {
     
     //UI
     @IBOutlet weak var baseTextView: UITextView!
@@ -17,14 +19,29 @@ class UartModuleViewController: UIViewController, CBPeripheralManagerDelegate, U
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var switchUI: UISwitch!
+    @IBOutlet weak var statusLabel: UILabel!
     
     //Data
     var peripheralManager: CBPeripheralManager?
     var peripheral: CBPeripheral!
     private var consoleAsciiText:NSAttributedString? = NSAttributedString(string: "")
+    let locationManager = CLLocationManager()
     
     var log = ""
     var message = ""
+    
+    var CO2 = 0.0
+    var TVOC = 0.0
+    var millis = 0
+    var temperature = 0.0
+    var pressure = 0.0
+    var altitude = 0.0
+    var lat = 0.0
+    var lon = 0.0
+    var pm25 = 0.0
+    var pm10 = 0.0
+    
+    var csvLog = "millis,CO2,TVOC,pm25,pm10,temperature,pressure,altitude,lat,lon\n"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +62,11 @@ class UartModuleViewController: UIViewController, CBPeripheralManagerDelegate, U
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
         //-Notification for updating the text view with incoming text
         updateIncomingData()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,37 +98,35 @@ class UartModuleViewController: UIViewController, CBPeripheralManagerDelegate, U
             self.consoleAsciiText = newAsciiText
             //self.baseTextView.attributedText = self.consoleAsciiText
             
-            var incomingString = characteristicASCIIValue as String
+            let incomingString = characteristicASCIIValue as String
             
             if incomingString.hasSuffix(";"){
-                //print("---------------- GOT END OF MESSAGE ----------------")
-                //incomingString += ", \n"
-                //self.message += incomingString
-                //self.log += "[MESSAGE] \(self.message)"
-                /*
-                var data = self.message.data(using: .utf8)
+                self.parsePacketString(incomingStr: incomingString)
+                // millis,CO2,TVOC,temperature,pressure,altitude,lat,lon
+                self.csvLog += "\(self.millis),\(self.CO2),\(self.TVOC),\(self.pm25),\(self.pm10),\(self.temperature),\(self.pressure),\(self.altitude),\(self.lat),\(self.lon)\n"
                 
-                do {
-                    let jsonSerialized = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
-                    if let json = jsonSerialized {
-                        
-                    }
-                } catch {
-                    
-                }*/
-                self.message = "" // Clear the message variable after we use it
-                print("message finished")
             } else if incomingString.hasSuffix(",") {
-                //self.message += incomingString
+                self.parsePacketString(incomingStr: incomingString)
+                
             } else {
                 print("error")
             }
             
-            //self.log += incomingString
-            self.baseTextView.text = self.log + "\n"
+            self.baseTextView.text = self.csvLog + "\n"
             
             self.baseTextView.scrollToBotom()
+            
+            let secsLeft = (1200000-self.millis)/1000
+            if(secsLeft < 0) {
+                self.statusLabel.text = "Ready!"
+            } else {
+                self.statusLabel.text = "Time left for warm up: \(self.secToHMS(seconds: secsLeft).1):\(self.secToHMS(seconds: secsLeft).2)"
+            }
         }
+    }
+    
+    func secToHMS (seconds : Int) -> (Int, Int, Int) {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
     
     func parsePacketString(incomingStr: String) {
@@ -119,9 +139,44 @@ class UartModuleViewController: UIViewController, CBPeripheralManagerDelegate, U
         switch varName {
         case "CO2":
             print("CO2")
+            CO2 = Double(varValue)!
+        case "TVOC":
+            print("TVOC")
+            TVOC = Double(varValue)!
+        case "mil":
+            print("millis")
+            millis = Int(varValue)!
+        case "temp" :
+            print("temp")
+            temperature = Double(varValue)!
+        case "pres":
+            print("pres")
+            pressure = Double(varValue)!
+        case "pm25":
+            print("pm25")
+            pm25 = Double(varValue)!
+        case "pm10":
+            print("pm10")
+            pm10 = Double(varValue)!
+        case "alt" :
+            print("alt")
+            altitude = Double(varValue)!
         default:
             print("error")
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
+        locationManager.stopUpdatingLocation()
+        print("Location Manager Error:")
+        print(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue: CLLocationCoordinate2D = manager.location!.coordinate
+        lat = locValue.latitude
+        lon = locValue.longitude
+        print("Got new lat, lon = \(lat), \(lon)")
     }
     
     @IBAction func exportPressed(_ sender: Any) {
@@ -172,10 +227,10 @@ class UartModuleViewController: UIViewController, CBPeripheralManagerDelegate, U
     
     func export() {
         
-        let fileName = "data.json"
+        let fileName = "data.csv"
         let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
         
-        let csvText = log
+        let csvText = csvLog
         
         do {
             try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
