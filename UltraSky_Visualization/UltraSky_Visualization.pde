@@ -6,7 +6,7 @@ PeasyCam cam;
 Table table;
 
 void setup()  {
-  size(640, 360, P3D);
+  size(1280, 800, P3D);
   noStroke();
   fill(204);
   cam = new PeasyCam(this, 400);
@@ -28,7 +28,7 @@ void setup()  {
 
 void draw()  {
   
-  background(0);
+  background(189,195,199);
   lights();
   
   /*
@@ -42,14 +42,15 @@ void draw()  {
   //box(160);
   translate(0, 0, 0);
   
+  /*
   stroke(255,0,0);
   line(0,0,0,300,0,0);
   
   stroke(0,255,0);
-  line(0,0,0,0,300,0);
+  line(0,0,0,0,-300,0);
   
   stroke(0,0,255);
-  line(0,0,0,0,0,300);
+  line(0,0,0,0,0,300);*/
   
   noStroke();
   
@@ -61,9 +62,10 @@ void draw()  {
     float lon = row.getFloat("lonMod");
     
     pushMatrix();
-    translate(lat, (lon - 600) * 2, (-alt) * 8);
+    translate(lat, -(lon - 600) * 2, (-alt) * 8);
     
-    float CO2HSB = map(CO2, 400,700, 0, 90); //1295
+    float CO2HSB = map(CO2, 300,700, 90, 0); //1295
+    CO2HSB = constrain(CO2HSB,0,90);
     
     colorMode(HSB);
     fill(CO2HSB,255,255);
@@ -72,7 +74,5 @@ void draw()  {
     box(10);
     translate(0, 0, 0);
     popMatrix();
-    //println("CO2: " + CO2 + ", Alt: " + alt + ", lat: " + lat + ", lon: " + lon); 
   }
-  delay(10);
 }
