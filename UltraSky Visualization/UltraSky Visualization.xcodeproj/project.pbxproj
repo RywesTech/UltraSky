@@ -13,6 +13,8 @@
 		9466559920362D4800CB5B16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9466559720362D4800CB5B16 /* Main.storyboard */; };
 		9466559B20362D4800CB5B16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9466559A20362D4800CB5B16 /* Assets.xcassets */; };
 		9466559E20362D4800CB5B16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9466559C20362D4800CB5B16 /* LaunchScreen.storyboard */; };
+		946655A6203631D600CB5B16 /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 946655A5203631D600CB5B16 /* data.csv */; };
+		946655AA20378ED600CB5B16 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 946655A920378ED600CB5B16 /* ground.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		9466559A20362D4800CB5B16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9466559D20362D4800CB5B16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9466559F20362D4800CB5B16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		946655A5203631D600CB5B16 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.csv; path = ../../UltraSky_Visualization/data/data.csv; sourceTree = "<group>"; };
+		946655A920378ED600CB5B16 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +60,9 @@
 		9466559020362D4800CB5B16 /* UltraSky Visualization */ = {
 			isa = PBXGroup;
 			children = (
+				946655A5203631D600CB5B16 /* data.csv */,
 				9466559120362D4800CB5B16 /* AppDelegate.swift */,
+				946655A920378ED600CB5B16 /* ground.png */,
 				9466559320362D4800CB5B16 /* art.scnassets */,
 				9466559520362D4800CB5B16 /* ViewController.swift */,
 				9466559720362D4800CB5B16 /* Main.storyboard */,
@@ -126,8 +132,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				946655AA20378ED600CB5B16 /* ground.png in Resources */,
 				9466559420362D4800CB5B16 /* art.scnassets in Resources */,
 				9466559E20362D4800CB5B16 /* LaunchScreen.storyboard in Resources */,
+				946655A6203631D600CB5B16 /* data.csv in Resources */,
 				9466559B20362D4800CB5B16 /* Assets.xcassets in Resources */,
 				9466559920362D4800CB5B16 /* Main.storyboard in Resources */,
 			);
@@ -281,6 +289,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RS4FMJ2NJ;
 				INFOPLIST_FILE = "UltraSky Visualization/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rywesTech.UltraSky-Visualization";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -296,6 +305,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RS4FMJ2NJ;
 				INFOPLIST_FILE = "UltraSky Visualization/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rywesTech.UltraSky-Visualization";
 				PRODUCT_NAME = "$(TARGET_NAME)";
