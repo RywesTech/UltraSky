@@ -1,0 +1,107 @@
+commit 7461d3da2c278ea93ee40c5a556f1b14a7e61364
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Feb 22 15:29:51 2018 -0800
+
+    AR Visualization finished
+
+commit 907fdf23722d157456653339eb2becf2be9c25e1
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Feb 15 13:05:46 2018 -0800
+
+    Added visualization app
+
+commit 4d62bd6b99cab6510dc664e4b6dd1697509a2434
+Author: rywesTech <ryan@westcott.email>
+Date:   Sun Feb 11 17:57:08 2018 -0800
+
+    correct rendering data
+
+commit d946b94b4cd0ac7a225a55d05175925838195a98
+Author: rywesTech <ryan@westcott.email>
+Date:   Sun Feb 11 17:12:50 2018 -0800
+
+    visualization drawing in 3D
+
+commit 9617feb26c64375ec5b122846496422754eaf324
+Author: rywesTech <ryan@westcott.email>
+Date:   Sun Feb 11 16:51:31 2018 -0800
+
+    app modified
+
+commit d66bf4a9f774885681ecf782e81892d1bd5de3c0
+Author: rywesTech <ryan@westcott.email>
+Date:   Sun Jan 14 23:02:30 2018 -0800
+
+    Replaced WiFi comms with Bluetooth LE comms
+
+commit 5ac9b42fa921f49d6950c867ff1d45a34c978680
+Author: rywesTech <ryan@westcott.email>
+Date:   Fri Jan 12 12:20:08 2018 -0800
+
+    do u know de way.... jk we got a working release
+
+commit a22693bb3ae3884e253bed10877ddee915769503
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Jan 11 21:05:28 2018 -0800
+
+    jkjk lmao now we have working release
+
+commit 082c7fa13e5ed3ae43fa299626001a6a163abf60
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Jan 11 21:02:43 2018 -0800
+
+    Working release
+
+commit aaf578bcd401939e01d7726bbc438c8cb2d43865
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Jan 4 22:22:15 2018 -0800
+
+    Precut top frame
+
+commit 2afca2fd3321b191d2abdfece347f521fd150b35
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Jan 4 21:03:11 2018 -0800
+
+    Worked on core code and modified the frame file. PREGROUPED back door
+
+commit 4fbbc5ef89d57b6999ffc5d701a8a27bac937481
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Jan 4 17:34:06 2018 -0800
+
+    First version printed
+
+commit 7ad5ab9bf24f3963532d932132d9e521fd1dea9c
+Author: rywesTech <ryan@westcott.email>
+Date:   Tue Jan 2 19:51:29 2018 -0800
+
+    About to cud CAD in 123D, revert this to pre-cut version
+
+commit adce3f7c5aadab9932f758d393c4913f43cc6fb3
+Author: rywesTech <ryan@westcott.email>
+Date:   Sat Dec 30 21:50:47 2017 -0800
+
+    First WORKING version. Ran first 2D Hillsdale area test with this code
+
+commit 14ff6b068d7157e727643b6e708096452961df9e
+Author: rywesTech <ryan@westcott.email>
+Date:   Sat Dec 30 13:00:03 2017 -0800
+
+    iOS app and arduino side are almost talking, just need to fix a few more issues.
+
+commit 3bd14edefaa17fe000755d9df51f7345ac99053a
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Dec 28 15:18:28 2017 -0800
+
+    Added iOS app project and basic code
+
+commit 7377151caca0c53bb62a7cdd366bae8abe263f51
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu Dec 28 14:36:33 2017 -0800
+
+    Core Code added
+
+commit 69f7583c974701dea09f36fbe34aceaf5ec0ddd2
+Author: Ryan Westcott <ryan@westcott.email>
+Date:   Sat Dec 9 15:24:47 2017 -0800
+
+    Initial commit
