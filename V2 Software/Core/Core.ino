@@ -1,11 +1,6 @@
 #include <Wire.h>
-//#include <Adafruit_BMP085.h>
-//#include "SparkFunCCS811.h"
-
-//Adafruit_BMP085 bmp;
-
-//#define CCS811_ADDR 0x5B //Default I2C Address
-//CCS811 CO2Sensor(CCS811_ADDR);
+#include <SD.h>
+#include <SPI.h>
 
 #define LED 13
 #define BUTTON 10
@@ -16,6 +11,8 @@
 boolean last_state = HIGH;
 
 float alt = 0;
+
+const int SD_CS = 10;
 
 void setup() {
   delay(1000); // slow down for serial monitor
@@ -33,6 +30,25 @@ void setup() {
   Wire.setSCL(19);
 
   Wire.onReceive(receiveEvent);
+
+  if (!SD.begin(SD_CS)) {
+    Serial.println(F("ERROR: Card failed, or not present"));
+    while(1);
+  }
+  Serial.println(F("SUCCESS: SD card initialized."));
+
+  String dataString = "\n\n\n -- SYSTEM INITIATED, NEW DATALOG -- ";
+  File dataFile = SD.open("datalog.txt", FILE_WRITE);
+  
+  if (dataFile) {
+    dataFile.println(dataString);
+    dataFile.close();
+  } else {
+    Serial.println(F("ERROR: opening datalog.txt"));
+    while(1);
+  }
+  Serial.print(F("File ready to datalog to!"));
+  
 /*
   CCS811Core::status returnCode = CO2Sensor.beginCore();
   Serial.print("beginCore exited with: ");
@@ -94,4 +110,15 @@ void receiveEvent(int howMany) {
   Serial.print("Full data: ");
   Serial.println(input);
   Serial.println();
+
+  String dataString = input;
+  File dataFile = SD.open("datalog.txt", FILE_WRITE);
+  
+  if (dataFile) {
+    dataFile.println(dataString);
+    dataFile.close();
+  } else {
+    Serial.println(F("ERROR: opening datalog.txt"));
+    while(1);
+  }
 }
