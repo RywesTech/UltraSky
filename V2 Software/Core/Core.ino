@@ -48,37 +48,7 @@ void setup() {
     while(1);
   }
   Serial.print(F("File ready to datalog to!"));
-  
-/*
-  CCS811Core::status returnCode = CO2Sensor.beginCore();
-  Serial.print("beginCore exited with: ");
-  switch ( returnCode )
-  {
-    case CCS811Core::SENSOR_SUCCESS:
-      Serial.print("SUCCESS");
-      break;
-    case CCS811Core::SENSOR_ID_ERROR:
-      Serial.print("ID_ERROR");
-      break;
-    case CCS811Core::SENSOR_I2C_ERROR:
-      Serial.print("I2C_ERROR");
-      break;
-    case CCS811Core::SENSOR_INTERNAL_ERROR:
-      Serial.print("INTERNAL_ERROR");
-      break;
-    case CCS811Core::SENSOR_GENERIC_ERROR:
-      Serial.print("GENERIC_ERROR");
-      break;
-    default:
-      Serial.print("Unspecified error.");
-  }*/
-  
-/*
-  if (!bmp.begin()) {
-    Serial.println("ERROR");
-  } else {
-    Serial.println("SUCCESS");
-  }*/
+
   Serial.println("starting loop!");
 }
 
@@ -99,9 +69,6 @@ void loop() {
 void receiveEvent(int howMany) {
   String input = "";
   while (Wire.available() > 0) {
-    //boolean b = Wire.read();
-    //Serial.print(b, DEC);
-    //digitalWrite(LED, !b);
     Serial.print("New Data: ");
     char c = Wire.read();
     Serial.println(c);
@@ -109,6 +76,12 @@ void receiveEvent(int howMany) {
   }
   Serial.print("Full data: ");
   Serial.println(input);
+
+  String key = getVal(input,':',0);
+  String value = getVal(input,':',1);
+
+  Serial.println("Key: " + key + ", value: " + value);
+  
   Serial.println();
 
   String dataString = input;
@@ -119,6 +92,22 @@ void receiveEvent(int howMany) {
     dataFile.close();
   } else {
     Serial.println(F("ERROR: opening datalog.txt"));
-    while(1);
   }
+}
+
+// https://stackoverflow.com/questions/9072320/split-string-into-string-array
+String getVal(String data, char separator, int index) {
+  int found = 0;
+  int strIndex[] = {0, -1};
+  int maxIndex = data.length()-1;
+
+  for(int i=0; i<=maxIndex && found<=index; i++){
+    if(data.charAt(i)==separator || i==maxIndex){
+        found++;
+        strIndex[0] = strIndex[1]+1;
+        strIndex[1] = (i == maxIndex) ? i+1 : i;
+    }
+  }
+
+  return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
