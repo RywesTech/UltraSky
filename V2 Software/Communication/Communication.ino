@@ -1,6 +1,8 @@
 #include <Wire.h>
 #include <SPI.h>
 #include "Adafruit_BLE_UART.h"
+#include "NazaCanDecoderLib.h"
+#include "FlexCAN.h"
 
 #define ADAFRUITBLE_REQ 10
 #define ADAFRUITBLE_RDY 2     // This should be an interrupt pin, on Uno thats #2 or #3
@@ -19,6 +21,12 @@ float GPSX, GPSY;
 long previous1HzMillis = 0;
 long interval1Hz = 1000;
 
+
+// CAN Stuff:
+uint32_t currTime, attiTime, otherTime, clockTime;
+char dateTime[20];
+uint32_t messageId;
+
 void setup() {
   Serial.begin(9600);
   Serial.println("Booting...");
@@ -30,6 +38,8 @@ void setup() {
 
   BTLEserial.setDeviceName("UltSky");
   BTLEserial.begin();
+
+  NazaCanDecoder.begin();
 
   Serial.println("Starting loop...");
 }
@@ -89,6 +99,71 @@ void loop() {
     }
   }
 
+
+  messageId = NazaCanDecoder.decode();
+//  if(messageId) { Serial.print("Message "); Serial.print(messageId, HEX); Serial.println(" decoded"); }
+
+  currTime = millis();
+
+  // Display attitude at 10Hz rate so every 100 milliseconds
+  if(attiTime < currTime)
+  {
+    attiTime = currTime + 100;
+    Serial.print("Pitch: "); Serial.print(NazaCanDecoder.getPitch());
+    Serial.print(", Roll: "); Serial.println(NazaCanDecoder.getRoll());
+  }
+
+  // Display other data at 5Hz rate so every 200 milliseconds
+  if(otherTime < currTime)
+  {
+    otherTime = currTime + 200;
+    Serial.print("Mode: "); 
+    switch (NazaCanDecoder.getMode())
+    {
+      case NazaCanDecoderLib::MANUAL:   Serial.print("MAN"); break;
+      case NazaCanDecoderLib::GPS:      Serial.print("GPS"); break;
+      case NazaCanDecoderLib::FAILSAFE: Serial.print("FS");  break;
+      case NazaCanDecoderLib::ATTI:     Serial.print("ATT"); break;
+      default:                          Serial.print("UNK");
+    }
+    Serial.print(", Bat: "); Serial.println(NazaCanDecoder.getBattery() / 1000.0, 2);
+
+    Serial.print("Lat: "); Serial.print(NazaCanDecoder.getLat(), 7);
+    Serial.print(", Lon: "); Serial.print(NazaCanDecoder.getLon(), 7);
+    Serial.print(", GPS alt: "); Serial.print(NazaCanDecoder.getGpsAlt());
+    Serial.print(", COG: "); Serial.print(NazaCanDecoder.getCog());
+    Serial.print(", Speed: "); Serial.print(NazaCanDecoder.getSpeed());
+    Serial.print(", VSI: "); Serial.print(NazaCanDecoder.getVsi());
+    Serial.print(", Fix: ");
+    switch (NazaCanDecoder.getFixType())
+    {
+      case NazaCanDecoderLib::NO_FIX:   Serial.print("No fix"); break;
+      case NazaCanDecoderLib::FIX_2D:   Serial.print("2D");     break;
+      case NazaCanDecoderLib::FIX_3D:   Serial.print("3D");     break;
+      case NazaCanDecoderLib::FIX_DGPS: Serial.print("DGPS");   break;
+      default:                          Serial.print("UNK");
+    }
+    Serial.print(", Sat: "); Serial.println(NazaCanDecoder.getNumSat());
+
+    Serial.print("Alt: "); Serial.print(NazaCanDecoder.getAlt());
+    Serial.print(", Heading: "); Serial.println(NazaCanDecoder.getHeading());
+  }
+
+  // Display date/time at 1Hz rate so every 1000 milliseconds
+  if(clockTime < currTime)
+  {
+    clockTime = currTime + 1000;
+    sprintf(dateTime, "%4u.%02u.%02u %02u:%02u:%02u", 
+            NazaCanDecoder.getYear() + 2000, NazaCanDecoder.getMonth(), NazaCanDecoder.getDay(),
+            NazaCanDecoder.getHour(), NazaCanDecoder.getMinute(), NazaCanDecoder.getSecond());
+    Serial.print("Date/Time: "); Serial.println(dateTime); 
+  }
+
+  NazaCanDecoder.heartbeat();
+
+
+  // Heartbeat and 1Hz message sending:
+  
   unsigned long currentMillis = millis();
 
   if (currentMillis - previous1HzMillis > interval1Hz) {
@@ -137,6 +212,8 @@ void sendMaster(String key, String value) {
 
   char dataBuff[dataLength];
   data.toCharArray(dataBuff, dataLength);
+
+  Serial.println("Begining to send...");
   
   Wire.beginTransmission(MASTER_ADDRESS);
   Wire.write(dataBuff);

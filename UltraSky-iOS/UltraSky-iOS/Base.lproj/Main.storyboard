@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fqB-Pz-V3j">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FS5-df-WtD">
+    <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,7 +15,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UltraSky_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="UltraSky IP Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CJe-wv-Neu">
@@ -94,29 +94,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128" y="231"/>
+            <point key="canvasLocation" x="2041" y="-611"/>
         </scene>
         <!--UltraSky-->
         <scene sceneID="eLu-vh-Y5B">
             <objects>
-                <viewController storyboardIdentifier="BLECentralViewController" automaticallyAdjustsScrollViewInsets="NO" id="YT3-dt-Y6w" customClass="BLECentralViewController" customModule="Basic_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BLECentralViewController" automaticallyAdjustsScrollViewInsets="NO" id="YT3-dt-Y6w" customClass="BLECentralViewController" customModule="UltraSky_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HUb-xU-Z1x"/>
                         <viewControllerLayoutGuide type="bottom" id="zO4-Ww-BtM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sXm-uK-89Z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="98" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eLH-tl-JNW">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BlueCell" rowHeight="98" id="QQn-Z7-UpC" customClass="PeripheralTableViewCell" customModule="Basic_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="98"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BlueCell" rowHeight="98" id="QQn-Z7-UpC" customClass="PeripheralTableViewCell" customModule="UltraSky_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="1024" height="98"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QQn-Z7-UpC" id="PzD-uT-Ajm">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="97.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="97.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RSSI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jzI-51-TfR">
@@ -172,13 +172,75 @@
             </objects>
             <point key="canvasLocation" x="244.92753623188409" y="-611.41304347826087"/>
         </scene>
+        <!--UltraSky-->
+        <scene sceneID="bnK-PD-Vgp">
+            <objects>
+                <collectionViewController id="s6u-RF-BBh" customClass="HomeCollectionViewController" customModule="UltraSky_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="QB5-ui-JSf">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dRi-vy-h1a">
+                            <size key="itemSize" width="175" height="175"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="8Xx-2Z-DJH" customClass="HomeCollectionViewCell" customModule="UltraSky_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dataset Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elK-uO-GD5">
+                                            <rect key="frame" x="0.0" y="134" width="175" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="January 1st, 12:00AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3q-dE-Bpg">
+                                            <rect key="frame" x="0.0" y="154" width="175" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W1Z-fk-VGq">
+                                            <rect key="frame" x="12" y="8" width="150" height="120"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <size key="customSize" width="175" height="175"/>
+                                <connections>
+                                    <outlet property="nameLabel" destination="elK-uO-GD5" id="xrC-72-HcY"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="s6u-RF-BBh" id="lkJ-Tx-zjH"/>
+                            <outlet property="delegate" destination="s6u-RF-BBh" id="saq-rJ-ELs"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="UltraSky" id="YGE-jI-eBq">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="ync-QI-XqY"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sqQ-Nq-rcs"/>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cVx-sC-S1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="161.71875" y="341.40625"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="K3n-X3-TXO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fqB-Pz-V3j" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6jK-wY-Bdf">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -193,23 +255,23 @@
         <!--Uart Module View Controller-->
         <scene sceneID="qOA-Fo-UFK">
             <objects>
-                <viewController storyboardIdentifier="UartModuleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eVq-QZ-xEt" customClass="UartModuleViewController" customModule="Basic_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UartModuleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eVq-QZ-xEt" customClass="UartModuleViewController" customModule="UltraSky_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HXh-Py-bwG"/>
                         <viewControllerLayoutGuide type="bottom" id="rsl-dy-pr5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AwR-Db-hJ7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlN-nR-rzj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eKF-fe-eVD" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABl-ao-Esf">
-                                                <rect key="frame" x="315" y="589" width="36" height="30"/>
+                                                <rect key="frame" x="964" y="690" width="36" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="36" id="7PR-yS-i3e"/>
                                                     <constraint firstAttribute="height" constant="30" id="PHS-bs-STQ"/>
@@ -220,7 +282,7 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ODw-2y-Bzk">
-                                                <rect key="frame" x="24" y="589" width="277" height="30"/>
+                                                <rect key="frame" x="24" y="690" width="926" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="s6P-IJ-uGU"/>
                                                 </constraints>
@@ -232,7 +294,7 @@
                                                 </connections>
                                             </textField>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iDp-8z-0YW">
-                                                <rect key="frame" x="95" y="552" width="51" height="31"/>
+                                                <rect key="frame" x="95" y="653" width="51" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="Cmm-5F-lRN"/>
                                                     <constraint firstAttribute="width" constant="49" id="mnV-XW-Iz9"/>
@@ -242,7 +304,7 @@
                                                 </connections>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On / Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="011-jD-zvR">
-                                                <rect key="frame" x="24" y="552" width="61" height="31"/>
+                                                <rect key="frame" x="24" y="653" width="61" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="61" id="flK-wR-7Zd"/>
                                                     <constraint firstAttribute="height" constant="31" id="sks-qD-Rpf"/>
@@ -252,7 +314,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Data goes here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7KT-4a-O2N">
-                                                <rect key="frame" x="16" y="103" width="343" height="417"/>
+                                                <rect key="frame" x="16" y="103" width="992" height="518"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -329,6 +391,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1a3-bN-l12" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1127.2" y="-612.14392803598207"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oaX-ok-KMH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FS5-df-WtD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Kw-V3-gp9">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="s6u-RF-BBh" kind="relationship" relationship="rootViewController" id="FdD-wi-NRz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eXB-18-8xc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-548" y="341"/>
         </scene>
     </scenes>
 </document>

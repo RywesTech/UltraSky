@@ -17,6 +17,8 @@
 		947825CD200BDF080026701A /* PeripheralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CC200BDF080026701A /* PeripheralTableViewCell.swift */; };
 		947825CF200BDF2F0026701A /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CE200BDF2F0026701A /* UUIDKey.swift */; };
 		947825D1200BE02F0026701A /* UartModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825D0200BE02F0026701A /* UartModuleViewController.swift */; };
+		94BFFCDE209561E20096968A /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */; };
+		94BFFCE0209564430096968A /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		947825CC200BDF080026701A /* PeripheralTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralTableViewCell.swift; sourceTree = "<group>"; };
 		947825CE200BDF2F0026701A /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
 		947825D0200BE02F0026701A /* UartModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UartModuleViewController.swift; sourceTree = "<group>"; };
+		94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
+		94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 				947825D0200BE02F0026701A /* UartModuleViewController.swift */,
 				947825CE200BDF2F0026701A /* UUIDKey.swift */,
 				9421D3521FF5A9A700992E4E /* ViewController.swift */,
+				94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */,
+				94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */,
 				9421D3541FF5A9A700992E4E /* Main.storyboard */,
 				9421D3571FF5A9A700992E4E /* Assets.xcassets */,
 				9421D3591FF5A9A700992E4E /* LaunchScreen.storyboard */,
@@ -156,8 +162,10 @@
 				947825CB200BDEE30026701A /* BLECentralViewController.swift in Sources */,
 				9421D3511FF5A9A700992E4E /* AppDelegate.swift in Sources */,
 				947825CF200BDF2F0026701A /* UUIDKey.swift in Sources */,
+				94BFFCDE209561E20096968A /* HomeCollectionViewController.swift in Sources */,
 				947825D1200BE02F0026701A /* UartModuleViewController.swift in Sources */,
 				947825CD200BDF080026701A /* PeripheralTableViewCell.swift in Sources */,
+				94BFFCE0209564430096968A /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

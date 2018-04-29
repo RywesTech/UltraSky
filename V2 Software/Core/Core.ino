@@ -2,7 +2,9 @@
 #include <SD.h>
 #include <SPI.h>
 
-#define LED 13
+#define LED_R 20
+#define LED_G 21
+#define LED_B 22
 #define BUTTON 10
 
 #define THIS_ADDRESS 0x8
@@ -18,9 +20,9 @@ void setup() {
   delay(1000); // slow down for serial monitor
   Serial.begin(9600);
   Serial.println("starting up!");
-  
-  pinMode(LED, OUTPUT);
-  digitalWrite(LED, LOW);
+
+  initLED();
+  modeError(); // Error unless otherwise stated
 
   pinMode(BUTTON, INPUT);
   digitalWrite(BUTTON, HIGH);
@@ -49,6 +51,7 @@ void setup() {
   }
   Serial.print(F("File ready to datalog to!"));
 
+  modeGood();
   Serial.println("starting loop!");
 }
 
@@ -111,3 +114,26 @@ String getVal(String data, char separator, int index) {
 
   return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
+
+void initLED() {
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+
+  analogWrite(LED_R, 0);
+  analogWrite(LED_G, 0);
+  analogWrite(LED_B, 0);
+}
+
+void modeGood(){
+  analogWrite(LED_B, 255/2);
+
+}
+
+
+void modeError(){
+  analogWrite(LED_B, 0);
+  analogWrite(LED_R, 255/2);
+  
+}
+
