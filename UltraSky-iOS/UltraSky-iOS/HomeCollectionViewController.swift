@@ -60,14 +60,16 @@ class HomeCollectionViewController: UICollectionViewController {
         print("loading cell")
         
         cell.nameLabel.text = "test"
-        //cell.backgroundColor = UIColor.blue
-        
-        //cell.backgroundColor = UIColor.blue
     
         return cell
     }
 
     // MARK: UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "goToView", sender: self)
+        print(indexPath)
+    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
