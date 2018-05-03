@@ -13,6 +13,7 @@
 		9421D3581FF5A9A700992E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9421D3571FF5A9A700992E4E /* Assets.xcassets */; };
 		9421D35B1FF5A9A700992E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9421D3591FF5A9A700992E4E /* LaunchScreen.storyboard */; };
 		94295A201FF87A6D00466F40 /* location (2).gpx in Resources */ = {isa = PBXBuildFile; fileRef = 94295A1F1FF87A6D00466F40 /* location (2).gpx */; };
+		944028DC209ACA04009358F0 /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 944028DB209ACA04009358F0 /* data.csv */; };
 		947825CB200BDEE30026701A /* BLECentralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CA200BDEE20026701A /* BLECentralViewController.swift */; };
 		947825CD200BDF080026701A /* PeripheralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CC200BDF080026701A /* PeripheralTableViewCell.swift */; };
 		947825CF200BDF2F0026701A /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CE200BDF2F0026701A /* UUIDKey.swift */; };
@@ -31,6 +32,7 @@
 		9421D35A1FF5A9A700992E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9421D35C1FF5A9A700992E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94295A1F1FF87A6D00466F40 /* location (2).gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "location (2).gpx"; sourceTree = "<group>"; };
+		944028DB209ACA04009358F0 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.csv; path = ../../UltraSky_Visualization/data/data.csv; sourceTree = "<group>"; };
 		947825CA200BDEE20026701A /* BLECentralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLECentralViewController.swift; sourceTree = "<group>"; };
 		947825CC200BDF080026701A /* PeripheralTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralTableViewCell.swift; sourceTree = "<group>"; };
 		947825CE200BDF2F0026701A /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				9421D3501FF5A9A700992E4E /* AppDelegate.swift */,
+				944028DB209ACA04009358F0 /* data.csv */,
 				947825CA200BDEE20026701A /* BLECentralViewController.swift */,
 				947825CC200BDF080026701A /* PeripheralTableViewCell.swift */,
 				947825D0200BE02F0026701A /* UartModuleViewController.swift */,
@@ -149,6 +152,7 @@
 			files = (
 				9421D35B1FF5A9A700992E4E /* LaunchScreen.storyboard in Resources */,
 				94295A201FF87A6D00466F40 /* location (2).gpx in Resources */,
+				944028DC209ACA04009358F0 /* data.csv in Resources */,
 				9421D3581FF5A9A700992E4E /* Assets.xcassets in Resources */,
 				9421D3561FF5A9A700992E4E /* Main.storyboard in Resources */,
 			);

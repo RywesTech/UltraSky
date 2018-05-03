@@ -23,6 +23,8 @@ class DetailViewController: UIViewController, ARSCNViewDelegate {
         let scene = SCNScene()
         ARView.scene = scene
         
+        updateARData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
