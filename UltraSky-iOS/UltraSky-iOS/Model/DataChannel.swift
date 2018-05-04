@@ -12,5 +12,5 @@ import RealmSwift
 class DataChannel: Object {
     
     @objc dynamic var name = "" //CO2, TVOC, etc...
-    var dataPoints = List<DataPoint>()
+    var dataPoints = List<DataPoint>() // All the data points for this channel
 }

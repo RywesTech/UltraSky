@@ -59,7 +59,7 @@
 		942420B5209BF0E6000ED795 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
 		94295A1F1FF87A6D00466F40 /* location (2).gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "location (2).gpx"; sourceTree = "<group>"; };
 		942DBB3A209BEE7100FF2B35 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
-		944028DB209ACA04009358F0 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.csv; path = ../../UltraSky_Visualization/data/data.csv; sourceTree = "<group>"; };
+		944028DB209ACA04009358F0 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.csv; sourceTree = "<group>"; };
 		947825CA200BDEE20026701A /* BLECentralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLECentralViewController.swift; sourceTree = "<group>"; };
 		947825CC200BDF080026701A /* PeripheralTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralTableViewCell.swift; sourceTree = "<group>"; };
 		947825CE200BDF2F0026701A /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 		9421D34F1FF5A9A700992E4E /* UltraSky-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				948279BA209C148D001E3154 /* Model */,
 				9421D3501FF5A9A700992E4E /* AppDelegate.swift */,
-				944028DB209ACA04009358F0 /* data.csv */,
 				947825CA200BDEE20026701A /* BLECentralViewController.swift */,
 				947825CC200BDF080026701A /* PeripheralTableViewCell.swift */,
 				947825D0200BE02F0026701A /* UartModuleViewController.swift */,
@@ -117,18 +117,26 @@
 				94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */,
 				94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */,
 				94BFFCE12096A5940096968A /* DetailViewController.swift */,
-				942DBB3A209BEE7100FF2B35 /* DataSet.swift */,
-				948279B2209BF3BD001E3154 /* TimeSet.swift */,
-				948279B6209BF454001E3154 /* DataChannel.swift */,
-				948279B4209BF3E5001E3154 /* DataPoint.swift */,
-				9421D3541FF5A9A700992E4E /* Main.storyboard */,
 				948279B8209BF64A001E3154 /* CSVToDBViewController.swift */,
+				9421D3541FF5A9A700992E4E /* Main.storyboard */,
 				9421D3571FF5A9A700992E4E /* Assets.xcassets */,
 				9421D3591FF5A9A700992E4E /* LaunchScreen.storyboard */,
 				9421D35C1FF5A9A700992E4E /* Info.plist */,
 				94295A1F1FF87A6D00466F40 /* location (2).gpx */,
 			);
 			path = "UltraSky-iOS";
+			sourceTree = "<group>";
+		};
+		948279BA209C148D001E3154 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				944028DB209ACA04009358F0 /* data.csv */,
+				942DBB3A209BEE7100FF2B35 /* DataSet.swift */,
+				948279B2209BF3BD001E3154 /* TimeSet.swift */,
+				948279B6209BF454001E3154 /* DataChannel.swift */,
+				948279B4209BF3E5001E3154 /* DataPoint.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

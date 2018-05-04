@@ -11,7 +11,7 @@ import RealmSwift
 
 class DataSet: Object {
     
-    @objc dynamic var name = ""
-    @objc dynamic var createdAt = NSDate()
-    var timeSets = List<TimeSet>()
+    @objc dynamic var name = "" // Name of the data set
+    @objc dynamic var createdAt = NSDate() // When it was created
+    var timeSets = List<TimeSet>() // all of the different time sets
 }

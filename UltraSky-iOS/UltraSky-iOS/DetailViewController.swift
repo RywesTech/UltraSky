@@ -9,11 +9,16 @@
 import UIKit
 import SceneKit
 import ARKit
+import RealmSwift
 
-class DetailViewController: UIViewController, ARSCNViewDelegate {
+class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
 
     @IBOutlet var ARView: ARSCNView!
-   
+    @IBOutlet weak var pickerView: UIPickerView!
+    var pickerData: [String] = [String]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +28,10 @@ class DetailViewController: UIViewController, ARSCNViewDelegate {
         let scene = SCNScene()
         ARView.scene = scene
         
-        //updateARData()
+        self.pickerView.delegate = self
+        self.pickerView.dataSource = self
+        
+        updateARData()
         
     }
     
@@ -49,6 +57,65 @@ class DetailViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func updateARData() {
+        
+        let realm = try! Realm()
+        let dataSet = realm.objects(DataSet.self).first
+        let timeSet = dataSet?.timeSets.first
+        let dataChannel = timeSet?.dataChannels.first
+        
+        for dataChannel in (timeSet?.dataChannels)! {
+            pickerData.append(dataChannel.name)
+            print(dataChannel.name)
+        }
+        
+        pickerView.reloadAllComponents()
+        
+        var latMin = 180.0
+        var latMax = 0.0
+        var lonMin = 180.0
+        var lonMax = 0.0
+        
+        for dataPoint in (dataChannel?.dataPoints)! {
+            let lat = dataPoint.lat
+            let lon = dataPoint.lon
+            let alt = dataPoint.alt
+            let val = dataPoint.value
+            
+            print(lat)
+            print(lon)
+            print(alt)
+            print(val)
+            print("")
+            
+            if lat < latMin {
+                latMin = lat
+            }
+            if lat > latMax {
+                latMax = lat
+            }
+            if lon < lonMin {
+                lonMin = lon
+            }
+            if lon > lonMax {
+                lonMax = lon
+            }
+            
+        }
+        
+        print(latMin)
+        print(latMax)
+        print(lonMin)
+        print(lonMax)
+        
+        let box = SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0)
+        box.firstMaterial?.diffuse.contents = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
+        box.firstMaterial?.isDoubleSided = true
+        let boxNode = SCNNode(geometry: box)
+        boxNode.position = SCNVector3(0, 0, 0)
+        ARView.scene.rootNode.addChildNode(boxNode)
+        
+        
+        /*
         var fileContent = ""
         
         if let filepath = Bundle.main.path(forResource: "data", ofType: "csv") {
@@ -89,6 +156,22 @@ class DetailViewController: UIViewController, ARSCNViewDelegate {
             boxNode.position = SCNVector3(lat!/(scale * 2), (alt! * 3)/scale, (-(lon! - 600))/(scale))
             ARView.scene.rootNode.addChildNode(boxNode)
         }
+         */
+        
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return for the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
     }
     
 

@@ -11,7 +11,7 @@ import RealmSwift
 
 class TimeSet: Object {
     
-    @objc dynamic var date = NSDate()
-    var dataChannels = List<DataChannel>() //CO2, TVOC, etc...
+    @objc dynamic var date = NSDate() // The end time that this time set was taken
+    var dataChannels = List<DataChannel>() // All the channels for this time
 }
 

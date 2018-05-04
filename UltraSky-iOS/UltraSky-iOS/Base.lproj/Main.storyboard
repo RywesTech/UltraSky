@@ -324,6 +324,7 @@
                     </view>
                     <connections>
                         <outlet property="ARView" destination="Crl-AV-vKL" id="bU9-mJ-KHH"/>
+                        <outlet property="pickerView" destination="Hdv-Gf-Cdo" id="1g1-Hy-TEa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vt-Jr-rUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -355,10 +356,10 @@
             </objects>
             <point key="canvasLocation" x="940" y="1116"/>
         </scene>
-        <!--View Controller-->
+        <!--ToDB View Controller-->
         <scene sceneID="k88-QG-q6H">
             <objects>
-                <viewController id="Wuz-kE-D05" sceneMemberID="viewController">
+                <viewController id="Wuz-kE-D05" customClass="CSVToDBViewController" customModule="UltraSky_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UPm-OD-WtE">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
