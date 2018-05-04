@@ -13,11 +13,9 @@ import RealmSwift
 
 class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-
     @IBOutlet var ARView: ARSCNView!
     @IBOutlet weak var pickerView: UIPickerView!
     var pickerData: [String] = [String]()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +30,6 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         self.pickerView.dataSource = self
         
         updateARData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,10 +49,6 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         ARView.session.pause()
     }
     
-    func addCSVtoDB(csv: String) {
-        
-    }
-    
     func updateARData() {
         
         let realm = try! Realm()
@@ -71,22 +64,23 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         pickerView.reloadAllComponents()
         
         var latMin = 180.0
-        var latMax = 0.0
+        var latMax = -180.0
         var lonMin = 180.0
-        var lonMax = 0.0
+        var lonMax = -180.0
+        var altMin = -Double.infinity
+        var altMac = Double.infinity
         
-        for dataPoint in (dataChannel?.dataPoints)! {
+        for dataPoint in (dataChannel?.dataPoints)! { // For loop to find minimun (and maximum) values
             let lat = dataPoint.lat
             let lon = dataPoint.lon
             let alt = dataPoint.alt
-            let val = dataPoint.value
             
             print(lat)
             print(lon)
             print(alt)
-            print(val)
             print("")
             
+            // Use this instead of an array to perserve memory:
             if lat < latMin {
                 latMin = lat
             }
@@ -99,13 +93,33 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
             if lon > lonMax {
                 lonMax = lon
             }
-            
         }
         
         print(latMin)
         print(latMax)
         print(lonMin)
         print(lonMax)
+        
+        for dataPoint in (dataChannel?.dataPoints)! {
+            let lat = dataPoint.lat
+            let lon = dataPoint.lon
+            let alt = dataPoint.alt
+            
+            var ARlat = 0.0 // Local latitude coordinates in AR space
+            var ARlon = 0.0 // Local latitude coordinates in AR space
+            var scaling = 1000.0
+            
+            ARlat = (lat - latMin) * scaling
+            ARlon = (lon - lonMin) * scaling
+            
+            let box = SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0)
+            box.firstMaterial?.diffuse.contents = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
+            box.firstMaterial?.isDoubleSided = true
+            let boxNode = SCNNode(geometry: box)
+            boxNode.position = SCNVector3(0, 0, 0)
+            ARView.scene.rootNode.addChildNode(boxNode)
+        }
+        
         
         let box = SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0)
         box.firstMaterial?.diffuse.contents = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
