@@ -23,7 +23,7 @@ class DetailViewController: UIViewController, ARSCNViewDelegate {
         let scene = SCNScene()
         ARView.scene = scene
         
-        updateARData()
+        //updateARData()
         
     }
     
@@ -42,6 +42,10 @@ class DetailViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         ARView.session.pause()
+    }
+    
+    func addCSVtoDB(csv: String) {
+        
     }
     
     func updateARData() {

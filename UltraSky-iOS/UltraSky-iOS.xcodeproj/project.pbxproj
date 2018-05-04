@@ -12,16 +12,40 @@
 		9421D3561FF5A9A700992E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9421D3541FF5A9A700992E4E /* Main.storyboard */; };
 		9421D3581FF5A9A700992E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9421D3571FF5A9A700992E4E /* Assets.xcassets */; };
 		9421D35B1FF5A9A700992E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9421D3591FF5A9A700992E4E /* LaunchScreen.storyboard */; };
+		942420B6209BF0E6000ED795 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942420B4209BF0E6000ED795 /* Realm.framework */; };
+		942420B7209BF0E6000ED795 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 942420B4209BF0E6000ED795 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		942420B8209BF0E6000ED795 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942420B5209BF0E6000ED795 /* RealmSwift.framework */; };
+		942420B9209BF0E6000ED795 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 942420B5209BF0E6000ED795 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94295A201FF87A6D00466F40 /* location (2).gpx in Resources */ = {isa = PBXBuildFile; fileRef = 94295A1F1FF87A6D00466F40 /* location (2).gpx */; };
+		942DBB3B209BEE7100FF2B35 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942DBB3A209BEE7100FF2B35 /* DataSet.swift */; };
 		944028DC209ACA04009358F0 /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 944028DB209ACA04009358F0 /* data.csv */; };
 		947825CB200BDEE30026701A /* BLECentralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CA200BDEE20026701A /* BLECentralViewController.swift */; };
 		947825CD200BDF080026701A /* PeripheralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CC200BDF080026701A /* PeripheralTableViewCell.swift */; };
 		947825CF200BDF2F0026701A /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CE200BDF2F0026701A /* UUIDKey.swift */; };
 		947825D1200BE02F0026701A /* UartModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825D0200BE02F0026701A /* UartModuleViewController.swift */; };
+		948279B3209BF3BD001E3154 /* TimeSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279B2209BF3BD001E3154 /* TimeSet.swift */; };
+		948279B5209BF3E5001E3154 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279B4209BF3E5001E3154 /* DataPoint.swift */; };
+		948279B7209BF454001E3154 /* DataChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279B6209BF454001E3154 /* DataChannel.swift */; };
+		948279B9209BF64A001E3154 /* CSVToDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279B8209BF64A001E3154 /* CSVToDBViewController.swift */; };
 		94BFFCDE209561E20096968A /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */; };
 		94BFFCE0209564430096968A /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */; };
 		94BFFCE22096A5940096968A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCE12096A5940096968A /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		942420BA209BF0E6000ED795 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				942420B9209BF0E6000ED795 /* RealmSwift.framework in Embed Frameworks */,
+				942420B7209BF0E6000ED795 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9421D34D1FF5A9A700992E4E /* UltraSky-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UltraSky-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,12 +55,19 @@
 		9421D3571FF5A9A700992E4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9421D35A1FF5A9A700992E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9421D35C1FF5A9A700992E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		942420B4209BF0E6000ED795 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../realm-swift-3.5.0/ios/swift-4.1/Realm.framework"; sourceTree = "<group>"; };
+		942420B5209BF0E6000ED795 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
 		94295A1F1FF87A6D00466F40 /* location (2).gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "location (2).gpx"; sourceTree = "<group>"; };
+		942DBB3A209BEE7100FF2B35 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
 		944028DB209ACA04009358F0 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.csv; path = ../../UltraSky_Visualization/data/data.csv; sourceTree = "<group>"; };
 		947825CA200BDEE20026701A /* BLECentralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLECentralViewController.swift; sourceTree = "<group>"; };
 		947825CC200BDF080026701A /* PeripheralTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralTableViewCell.swift; sourceTree = "<group>"; };
 		947825CE200BDF2F0026701A /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
 		947825D0200BE02F0026701A /* UartModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UartModuleViewController.swift; sourceTree = "<group>"; };
+		948279B2209BF3BD001E3154 /* TimeSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSet.swift; sourceTree = "<group>"; };
+		948279B4209BF3E5001E3154 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
+		948279B6209BF454001E3154 /* DataChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChannel.swift; sourceTree = "<group>"; };
+		948279B8209BF64A001E3154 /* CSVToDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVToDBViewController.swift; sourceTree = "<group>"; };
 		94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
 		94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		94BFFCE12096A5940096968A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942420B8209BF0E6000ED795 /* RealmSwift.framework in Frameworks */,
+				942420B6209BF0E6000ED795 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +89,8 @@
 		9421D3441FF5A9A700992E4E = {
 			isa = PBXGroup;
 			children = (
+				942420B4209BF0E6000ED795 /* Realm.framework */,
+				942420B5209BF0E6000ED795 /* RealmSwift.framework */,
 				9421D34F1FF5A9A700992E4E /* UltraSky-iOS */,
 				9421D34E1FF5A9A700992E4E /* Products */,
 			);
@@ -82,7 +117,12 @@
 				94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */,
 				94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */,
 				94BFFCE12096A5940096968A /* DetailViewController.swift */,
+				942DBB3A209BEE7100FF2B35 /* DataSet.swift */,
+				948279B2209BF3BD001E3154 /* TimeSet.swift */,
+				948279B6209BF454001E3154 /* DataChannel.swift */,
+				948279B4209BF3E5001E3154 /* DataPoint.swift */,
 				9421D3541FF5A9A700992E4E /* Main.storyboard */,
+				948279B8209BF64A001E3154 /* CSVToDBViewController.swift */,
 				9421D3571FF5A9A700992E4E /* Assets.xcassets */,
 				9421D3591FF5A9A700992E4E /* LaunchScreen.storyboard */,
 				9421D35C1FF5A9A700992E4E /* Info.plist */,
@@ -101,6 +141,8 @@
 				9421D3491FF5A9A700992E4E /* Sources */,
 				9421D34A1FF5A9A700992E4E /* Frameworks */,
 				9421D34B1FF5A9A700992E4E /* Resources */,
+				942420BA209BF0E6000ED795 /* Embed Frameworks */,
+				942420BB209BF125000ED795 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -160,6 +202,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		942420BB209BF125000ED795 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9421D3491FF5A9A700992E4E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -167,12 +225,17 @@
 			files = (
 				94BFFCE22096A5940096968A /* DetailViewController.swift in Sources */,
 				9421D3531FF5A9A700992E4E /* ViewController.swift in Sources */,
+				948279B9209BF64A001E3154 /* CSVToDBViewController.swift in Sources */,
 				947825CB200BDEE30026701A /* BLECentralViewController.swift in Sources */,
 				9421D3511FF5A9A700992E4E /* AppDelegate.swift in Sources */,
 				947825CF200BDF2F0026701A /* UUIDKey.swift in Sources */,
 				94BFFCDE209561E20096968A /* HomeCollectionViewController.swift in Sources */,
+				948279B5209BF3E5001E3154 /* DataPoint.swift in Sources */,
+				948279B7209BF454001E3154 /* DataChannel.swift in Sources */,
+				942DBB3B209BEE7100FF2B35 /* DataSet.swift in Sources */,
 				947825D1200BE02F0026701A /* UartModuleViewController.swift in Sources */,
 				947825CD200BDF080026701A /* PeripheralTableViewCell.swift in Sources */,
+				948279B3209BF3BD001E3154 /* TimeSet.swift in Sources */,
 				94BFFCE0209564430096968A /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +296,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -290,6 +354,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
