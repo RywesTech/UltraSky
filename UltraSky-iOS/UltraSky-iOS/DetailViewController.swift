@@ -67,8 +67,8 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         var latMax = -180.0
         var lonMin = 180.0
         var lonMax = -180.0
-        var altMin = -Double.infinity
-        var altMac = Double.infinity
+        var altMin = Double.infinity
+        var altMax = -Double.infinity
         
         for dataPoint in (dataChannel?.dataPoints)! { // For loop to find minimun (and maximum) values
             let lat = dataPoint.lat
@@ -93,12 +93,20 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
             if lon > lonMax {
                 lonMax = lon
             }
+            if alt < altMin {
+                altMin = alt
+            }
+            if alt > altMax {
+                altMax = alt
+            }
         }
         
         print(latMin)
         print(latMax)
         print(lonMin)
         print(lonMax)
+        print(altMin)
+        print(altMax)
         
         for dataPoint in (dataChannel?.dataPoints)! {
             let lat = dataPoint.lat
@@ -116,7 +124,7 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
             box.firstMaterial?.diffuse.contents = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
             box.firstMaterial?.isDoubleSided = true
             let boxNode = SCNNode(geometry: box)
-            boxNode.position = SCNVector3(0, 0, 0)
+            boxNode.position = SCNVector3(ARlat, ARlon, 0)
             ARView.scene.rootNode.addChildNode(boxNode)
         }
         

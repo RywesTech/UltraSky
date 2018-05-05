@@ -27,6 +27,8 @@
 		948279B5209BF3E5001E3154 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279B4209BF3E5001E3154 /* DataPoint.swift */; };
 		948279B7209BF454001E3154 /* DataChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279B6209BF454001E3154 /* DataChannel.swift */; };
 		948279B9209BF64A001E3154 /* CSVToDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279B8209BF64A001E3154 /* CSVToDBViewController.swift */; };
+		948279BC209D77DC001E3154 /* RealTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279BB209D77DC001E3154 /* RealTimeViewController.swift */; };
+		948279BE209D7891001E3154 /* NRFManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279BD209D7891001E3154 /* NRFManager.swift */; };
 		94BFFCDE209561E20096968A /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */; };
 		94BFFCE0209564430096968A /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */; };
 		94BFFCE22096A5940096968A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCE12096A5940096968A /* DetailViewController.swift */; };
@@ -68,6 +70,8 @@
 		948279B4209BF3E5001E3154 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 		948279B6209BF454001E3154 /* DataChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChannel.swift; sourceTree = "<group>"; };
 		948279B8209BF64A001E3154 /* CSVToDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVToDBViewController.swift; sourceTree = "<group>"; };
+		948279BB209D77DC001E3154 /* RealTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeViewController.swift; sourceTree = "<group>"; };
+		948279BD209D7891001E3154 /* NRFManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NRFManager.swift; sourceTree = "<group>"; };
 		94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
 		94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		94BFFCE12096A5940096968A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			children = (
 				948279BA209C148D001E3154 /* Model */,
 				9421D3501FF5A9A700992E4E /* AppDelegate.swift */,
+				948279BD209D7891001E3154 /* NRFManager.swift */,
 				947825CA200BDEE20026701A /* BLECentralViewController.swift */,
 				947825CC200BDF080026701A /* PeripheralTableViewCell.swift */,
 				947825D0200BE02F0026701A /* UartModuleViewController.swift */,
@@ -118,6 +123,7 @@
 				94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */,
 				94BFFCE12096A5940096968A /* DetailViewController.swift */,
 				948279B8209BF64A001E3154 /* CSVToDBViewController.swift */,
+				948279BB209D77DC001E3154 /* RealTimeViewController.swift */,
 				9421D3541FF5A9A700992E4E /* Main.storyboard */,
 				9421D3571FF5A9A700992E4E /* Assets.xcassets */,
 				9421D3591FF5A9A700992E4E /* LaunchScreen.storyboard */,
@@ -243,8 +249,10 @@
 				942DBB3B209BEE7100FF2B35 /* DataSet.swift in Sources */,
 				947825D1200BE02F0026701A /* UartModuleViewController.swift in Sources */,
 				947825CD200BDF080026701A /* PeripheralTableViewCell.swift in Sources */,
+				948279BE209D7891001E3154 /* NRFManager.swift in Sources */,
 				948279B3209BF3BD001E3154 /* TimeSet.swift in Sources */,
 				94BFFCE0209564430096968A /* HomeCollectionViewCell.swift in Sources */,
+				948279BC209D77DC001E3154 /* RealTimeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

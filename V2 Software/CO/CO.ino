@@ -5,11 +5,20 @@
 #define MASTER_ADDRESS 0x8
 
 const int sensorPin = A0;
-int sensorValue = 0;
+
+int COLevel = 0;
+String deviceType = "sen"; // Sensor
+
+// timing values:
+long previousMillis = 0;
+long interval = 1000;
 
 void setup() {
   Serial.begin(9600);
   Serial.println("Booting...");
+
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
 
   Wire.begin(THIS_ADDRESS);
   Wire.onReceive(receiveEvent);
@@ -21,9 +30,15 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  sensorValue = analogRead(sensorPin);
-  sendMaster("CO", String(sensorValue));
-  delay(1000);
+  COLevel = analogRead(sensorPin);
+
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis > interval) {
+    previousMillis = currentMillis;
+
+    sendMaster(deviceType, "CO", String(COLevel));
+    
+  }
 
 }
 
@@ -31,19 +46,19 @@ void loop() {
 void receiveEvent(int howMany) {
   Serial.println("Received Data");
   while (Wire.available() > 0) {
-    //boolean b = Wire.read();
-    //Serial.print(b, DEC);
-    //digitalWrite(LED, !b);
   }
   Serial.println();
 }
 
-void sendMaster(String key, String value) {
+// Device Type: sen (sensor)
+// Key: CO (Carbon monoxide)
+// Value: value of sensor
+void sendMaster(String deviceType, String key, String value) {
   digitalWrite(LED, HIGH);
   delay(100);
   digitalWrite(LED, LOW);
 
-  String data = key + ":" + value;
+  String data = deviceType + "-" + key + ":" + value;
   int dataLength = data.length() + 1;
 
   Serial.println("Data to send: " + data);

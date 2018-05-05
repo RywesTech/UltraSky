@@ -7,28 +7,23 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let reuseIdentifier = "Cell"
 
 class HomeCollectionViewController: UICollectionViewController {
-
+    
+    var collectionData = List<DataSet>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        //self.collectionView!.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        
+        let realm = try! Realm()
+        for dataSet in realm.objects(DataSet.self){
+            collectionData.append(dataSet)
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     /*
     // MARK: - Navigation
 
@@ -49,7 +44,7 @@ class HomeCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 3
+        return collectionData.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> HomeCollectionViewCell {
@@ -59,7 +54,8 @@ class HomeCollectionViewController: UICollectionViewController {
         
         print("loading cell")
         
-        cell.nameLabel.text = "test"
+        //cell.nameLabel.text = "test"
+        cell.nameLabel.text = collectionData[indexPath.row].name
     
         return cell
     }

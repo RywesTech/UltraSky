@@ -16,7 +16,7 @@ class CSVToDBViewController: UIViewController {
         
         /*
         try! realm.write {
-            realm.deleteAll() // DELETE THIS
+            realm.deleteAll() // DELETE THIS OR EVERYTHING GOES TO SHIT
         }*/
         
         

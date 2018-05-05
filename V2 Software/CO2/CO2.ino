@@ -2,26 +2,25 @@
 #include "SparkFunCCS811.h"
 
 #define LED 13
-#define BUTTON 10
-
-#define CCS811_ADDR 0x5B //Default I2C Address
-CCS811 CO2Sensor(CCS811_ADDR);
-
 #define THIS_ADDRESS 0x9
 #define MASTER_ADDRESS 0x8
 
-boolean last_state = HIGH;
+// #define CCS811_ADDR 0x5B //Default I2C Address
+// CCS811 CO2Sensor(CCS811_ADDR);
 
 float CO2Level, TVOCLevel;
+String deviceType = "sen"; // Sensor
+
+// timing values:
+long previousMillis = 0;
+long interval = 1000;
 
 void setup() {
   Serial.begin(9600);
   Serial.println("Booting...");
+
   pinMode(LED, OUTPUT);
   digitalWrite(LED, LOW);
-
-  pinMode(BUTTON, INPUT);
-  digitalWrite(BUTTON, HIGH);
 
   Wire.begin(THIS_ADDRESS);
   Wire.onReceive(receiveEvent);
@@ -48,18 +47,21 @@ void setup() {
       default:
         Serial.print("Unspecified error.");
     }*/
-    Serial.println("Starting loop...");
+
+  Serial.println("Starting loop...");
 }
 
 void loop() {
-  /*
-  if (digitalRead(BUTTON) != last_state) {
-    last_state = digitalRead(BUTTON);
-    sendNewData();
-  }*/
 
-  sendNewData();
-  delay(1000);
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis > interval) {
+    previousMillis = currentMillis;
+
+    sendMaster(deviceType, "CO2", String(CO2Level));
+    delay(10); // let the bus recover
+    sendMaster(deviceType, "TVOC", String(TVOCLevel));
+    
+  }
 
   /*if (CO2Sensor.dataAvailable()) {
     Serial.println("Data available");
@@ -92,22 +94,31 @@ void loop() {
 void receiveEvent(int howMany) {
   Serial.println("Received Data");
   while (Wire.available() > 0) {
-    //boolean b = Wire.read();
-    //Serial.print(b, DEC);
-    //digitalWrite(LED, !b);
   }
   Serial.println();
 }
 
-void sendNewData() {
-
+// Device Type: sen (sensor)
+// Key: CO (Carbon monoxide)
+// Value: value of sensor
+void sendMaster(String deviceType, String key, String value) {
   digitalWrite(LED, HIGH);
   delay(100);
   digitalWrite(LED, LOW);
-  Wire.beginTransmission(MASTER_ADDRESS);
-  Wire.write("CO2:1234.56");
-  Wire.endTransmission();
-  Serial.println("Sent Data");
-  
-}
 
+  String data = deviceType + "-" + key + ":" + value;
+  int dataLength = data.length() + 1;
+
+  Serial.println("Data to send: " + data);
+
+  char dataBuff[dataLength];
+  data.toCharArray(dataBuff, dataLength);
+
+  Serial.println("Begining to send...");
+  
+  Wire.beginTransmission(MASTER_ADDRESS);
+  Wire.write(dataBuff);
+  Wire.endTransmission();
+
+  Serial.println("Sent Data");
+}
