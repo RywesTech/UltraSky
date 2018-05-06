@@ -15,7 +15,11 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
     
     @IBOutlet var ARView: ARSCNView!
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var lowerBoundSlider: UISlider!
+    @IBOutlet weak var upperBoundSlider: UISlider!
+    
     var pickerData: [String] = [String]()
+    var dataChannelName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,18 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
         
+        let realm = try! Realm()
+        let dataSet = realm.objects(DataSet.self).first // Update this for when we have multiple datasets
+        let timeSet = dataSet?.timeSets.first // Update for multiple time sets
+        
+        for dataChannel in (timeSet?.dataChannels)! {
+            pickerData.append(dataChannel.name)
+            print(dataChannel.name)
+        }
+        
+        pickerView.reloadAllComponents()
+        
+        dataChannelName = pickerData[0]
         updateARData()
     }
     
@@ -51,17 +67,15 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
     
     func updateARData() {
         
-        let realm = try! Realm()
-        let dataSet = realm.objects(DataSet.self).first
-        let timeSet = dataSet?.timeSets.first
-        let dataChannel = timeSet?.dataChannels.first
-        
-        for dataChannel in (timeSet?.dataChannels)! {
-            pickerData.append(dataChannel.name)
-            print(dataChannel.name)
+        ARView.scene.rootNode.enumerateChildNodes { (node, stop) in
+            node.removeFromParentNode()
         }
         
-        pickerView.reloadAllComponents()
+        let realm = try! Realm()
+        let dataSet = realm.objects(DataSet.self).first // Update this for when we have multiple datasets
+        let timeSet = dataSet?.timeSets.first // Update for multiple time sets
+        let dataChannels = timeSet?.dataChannels.filter("name == '\(dataChannelName)'")
+        let dataChannel = dataChannels?.first // this works but it's shitty
         
         var latMin = 180.0
         var latMax = -180.0
@@ -69,16 +83,14 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         var lonMax = -180.0
         var altMin = Double.infinity
         var altMax = -Double.infinity
+        var valMin = Double.infinity
+        var valMax = -Double.infinity
         
         for dataPoint in (dataChannel?.dataPoints)! { // For loop to find minimun (and maximum) values
             let lat = dataPoint.lat
             let lon = dataPoint.lon
             let alt = dataPoint.alt
-            
-            print(lat)
-            print(lon)
-            print(alt)
-            print("")
+            let val = dataPoint.value
             
             // Use this instead of an array to perserve memory:
             if lat < latMin {
@@ -99,73 +111,39 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
             if alt > altMax {
                 altMax = alt
             }
+            if val < valMin {
+                valMin = val
+            }
+            if val > valMax {
+                valMax = val
+            }
         }
-        
+        /*
         print(latMin)
         print(latMax)
         print(lonMin)
         print(lonMax)
         print(altMin)
-        print(altMax)
+        print(altMax)*/
         
         for dataPoint in (dataChannel?.dataPoints)! {
             let lat = dataPoint.lat
             let lon = dataPoint.lon
             let alt = dataPoint.alt
+            let val = dataPoint.value
             
             var ARlat = 0.0 // Local latitude coordinates in AR space
-            var ARlon = 0.0 // Local latitude coordinates in AR space
-            var scaling = 1000.0
+            var ARlon = 0.0 // Local longitude coordinates in AR space
+            var ARalt = 0.0 // Local altitude coordinates in AR space
+            
+            let scaling = 1000.0
+            let altScaling = 0.01
             
             ARlat = (lat - latMin) * scaling
             ARlon = (lon - lonMin) * scaling
+            ARalt = alt * altScaling
             
-            let box = SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0)
-            box.firstMaterial?.diffuse.contents = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
-            box.firstMaterial?.isDoubleSided = true
-            let boxNode = SCNNode(geometry: box)
-            boxNode.position = SCNVector3(ARlat, ARlon, 0)
-            ARView.scene.rootNode.addChildNode(boxNode)
-        }
-        
-        
-        let box = SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0)
-        box.firstMaterial?.diffuse.contents = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
-        box.firstMaterial?.isDoubleSided = true
-        let boxNode = SCNNode(geometry: box)
-        boxNode.position = SCNVector3(0, 0, 0)
-        ARView.scene.rootNode.addChildNode(boxNode)
-        
-        
-        /*
-        var fileContent = ""
-        
-        if let filepath = Bundle.main.path(forResource: "data", ofType: "csv") {
-            do {
-                fileContent = try String(contentsOfFile: filepath)
-            } catch {
-                // contents could not be loaded
-                print("ERROR")
-            }
-        } else {
-            // file not found!
-            print("ERROR")
-        }
-        
-        var data: [[String]] = fileContent.components(separatedBy: "\r\n").map{ $0.components(separatedBy: ",") }
-        
-        data.removeFirst() // Clean up headder
-        data.removeLast()  // Clean up termination row
-        
-        for row in data {
-            let lat = Double(row[8]) // X (?)
-            let lon = Double(row[9]) // Y (?)
-            let alt = Double(row[5]) // Z (?)
-            let value = Int(row[1])  // data
-            
-            let scale = 300.0
-            
-            let HSB = map(value: Float(value!), minDomain: 0.35, maxDomain: 0.0, minRange: 300, maxRange: 700).clamped(to: 0.0...0.35)
+            let HSB = map(value: Float(val), minDomain: 0.35, maxDomain: 0.0, minRange: Float(valMin), maxRange: Float(valMax)).clamped(to: 0.0...0.35) // 300 - 700 for CO2
             
             let box = SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0)
             box.firstMaterial?.diffuse.contents = UIColor(
@@ -175,38 +153,28 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
                 alpha: 1.0)
             box.firstMaterial?.isDoubleSided = true
             let boxNode = SCNNode(geometry: box)
-            boxNode.position = SCNVector3(lat!/(scale * 2), (alt! * 3)/scale, (-(lon! - 600))/(scale))
+            boxNode.position = SCNVector3(ARlat, ARalt, ARlon)  // y-axis runs paralell to gravity
             ARView.scene.rootNode.addChildNode(boxNode)
         }
-         */
-        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
     
-    // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        dataChannelName = pickerData[row]
+        print("Loading new data channel: \(dataChannelName)")
+        updateARData()
     }
-    */
-    
     
     // MARK: - Utility Functions
     

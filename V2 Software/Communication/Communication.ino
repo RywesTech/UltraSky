@@ -76,32 +76,32 @@ void loop() {
     if (BTLEserial.available()) {
       Serial.print("* "); Serial.print(BTLEserial.available()); Serial.println(F(" bytes available from BTLE"));
       // OK while we still have something to read, get a character and print it out
-    String input = "";
-    while (BTLEserial.available()) {
-      Serial.print("New Data: ");
-      char c = BTLEserial.read();
-      Serial.println(c);
-      input += c;
-    }
-    Serial.print("Full data: ");
-    Serial.println(input);
-    String key = getVal(input, ':', 0);
-    String value = getVal(input, ':', 1);
-    Serial.println("Key: " + key + ", value: " + value);
-
-    Serial.println();
-
-    if (key == "datalog"){
-      if (value == "start") {
-        sendMaster(deviceType, "datalog", "start");
-      } else if (value == "stop"){
-        sendMaster(deviceType, "datalog", "stop");
+      String input = "";
+      while (BTLEserial.available()) {
+        Serial.print("New Data: ");
+        char c = BTLEserial.read();
+        Serial.println(c);
+        input += c;
       }
-    } else if (key == "data"){
-      
-    } else {
-      Serial.println("Unknown key");
-    }
+      Serial.print("Full data: ");
+      Serial.println(input);
+      String key = getVal(input, ':', 0);
+      String value = getVal(input, ':', 1);
+      Serial.println("Key: " + key + ", value: " + value);
+
+      Serial.println();
+
+      if (key == "datalog") {
+        if (value == "start") {
+          sendMaster(deviceType, "datalog", "start");
+        } else if (value == "stop") {
+          sendMaster(deviceType, "datalog", "stop");
+        }
+      } else if (key == "data") {
+
+      } else {
+        Serial.println("Unknown key");
+      }
     }
 
 
@@ -129,18 +129,16 @@ void loop() {
   //  if(messageId) { Serial.print("Message "); Serial.print(messageId, HEX); Serial.println(" decoded"); }
 
   currTime = millis();
-  /*
+  ///*
   // Display attitude at 10Hz rate so every 100 milliseconds
-  if(attiTime < currTime)
-  {
+  if (attiTime < currTime) {
     attiTime = currTime + 100;
     Serial.print("Pitch: "); Serial.print(NazaCanDecoder.getPitch());
     Serial.print(", Roll: "); Serial.println(NazaCanDecoder.getRoll());
   }
 
   // Display other data at 5Hz rate so every 200 milliseconds
-  if(otherTime < currTime)
-  {
+  if (otherTime < currTime) {
     otherTime = currTime + 200;
     Serial.print("Mode: ");
     switch (NazaCanDecoder.getMode())
@@ -175,14 +173,18 @@ void loop() {
   }
 
   // Display date/time at 1Hz rate so every 1000 milliseconds
-  if(clockTime < currTime)
+  if (clockTime < currTime)
   {
     clockTime = currTime + 1000;
     sprintf(dateTime, "%4u.%02u.%02u %02u:%02u:%02u",
             NazaCanDecoder.getYear() + 2000, NazaCanDecoder.getMonth(), NazaCanDecoder.getDay(),
             NazaCanDecoder.getHour(), NazaCanDecoder.getMinute(), NazaCanDecoder.getSecond());
     Serial.print("Date/Time: "); Serial.println(dateTime);
-  }*/
+  }//*/
+
+  GPSX = NazaCanDecoder.getLat();
+  GPSY = NazaCanDecoder.getLon();
+  alt  = NazaCanDecoder.getGpsAlt();
 
   NazaCanDecoder.heartbeat();
 
@@ -240,16 +242,16 @@ void sendMaster(String deviceType, String key, String value) {
 String getVal(String data, char separator, int index) {
   int found = 0;
   int strIndex[] = {0, -1};
-  int maxIndex = data.length()-1;
+  int maxIndex = data.length() - 1;
 
-  for(int i=0; i<=maxIndex && found<=index; i++){
-    if(data.charAt(i)==separator || i==maxIndex){
-        found++;
-        strIndex[0] = strIndex[1]+1;
-        strIndex[1] = (i == maxIndex) ? i+1 : i;
+  for (int i = 0; i <= maxIndex && found <= index; i++) {
+    if (data.charAt(i) == separator || i == maxIndex) {
+      found++;
+      strIndex[0] = strIndex[1] + 1;
+      strIndex[1] = (i == maxIndex) ? i + 1 : i;
     }
   }
 
-  return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
+  return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
 

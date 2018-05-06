@@ -29,6 +29,7 @@
 		948279B9209BF64A001E3154 /* CSVToDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279B8209BF64A001E3154 /* CSVToDBViewController.swift */; };
 		948279BC209D77DC001E3154 /* RealTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279BB209D77DC001E3154 /* RealTimeViewController.swift */; };
 		948279BE209D7891001E3154 /* NRFManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279BD209D7891001E3154 /* NRFManager.swift */; };
+		948279C0209E6DCE001E3154 /* LoadCoreSDDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948279BF209E6DCD001E3154 /* LoadCoreSDDataViewController.swift */; };
 		94BFFCDE209561E20096968A /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */; };
 		94BFFCE0209564430096968A /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */; };
 		94BFFCE22096A5940096968A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BFFCE12096A5940096968A /* DetailViewController.swift */; };
@@ -72,6 +73,7 @@
 		948279B8209BF64A001E3154 /* CSVToDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVToDBViewController.swift; sourceTree = "<group>"; };
 		948279BB209D77DC001E3154 /* RealTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeViewController.swift; sourceTree = "<group>"; };
 		948279BD209D7891001E3154 /* NRFManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NRFManager.swift; sourceTree = "<group>"; };
+		948279BF209E6DCD001E3154 /* LoadCoreSDDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCoreSDDataViewController.swift; sourceTree = "<group>"; };
 		94BFFCDD209561E20096968A /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
 		94BFFCDF209564430096968A /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		94BFFCE12096A5940096968A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				94BFFCE12096A5940096968A /* DetailViewController.swift */,
 				948279B8209BF64A001E3154 /* CSVToDBViewController.swift */,
 				948279BB209D77DC001E3154 /* RealTimeViewController.swift */,
+				948279BF209E6DCD001E3154 /* LoadCoreSDDataViewController.swift */,
 				9421D3541FF5A9A700992E4E /* Main.storyboard */,
 				9421D3571FF5A9A700992E4E /* Assets.xcassets */,
 				9421D3591FF5A9A700992E4E /* LaunchScreen.storyboard */,
@@ -241,6 +244,7 @@
 				9421D3531FF5A9A700992E4E /* ViewController.swift in Sources */,
 				948279B9209BF64A001E3154 /* CSVToDBViewController.swift in Sources */,
 				947825CB200BDEE30026701A /* BLECentralViewController.swift in Sources */,
+				948279C0209E6DCE001E3154 /* LoadCoreSDDataViewController.swift in Sources */,
 				9421D3511FF5A9A700992E4E /* AppDelegate.swift in Sources */,
 				947825CF200BDF2F0026701A /* UUIDKey.swift in Sources */,
 				94BFFCDE209561E20096968A /* HomeCollectionViewController.swift in Sources */,
