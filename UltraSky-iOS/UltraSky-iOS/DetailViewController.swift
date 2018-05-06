@@ -17,9 +17,13 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var lowerBoundSlider: UISlider!
     @IBOutlet weak var upperBoundSlider: UISlider!
+    @IBOutlet weak var lowerBoundLabel: UILabel!
+    @IBOutlet weak var upperBoundLabel: UILabel!
     
     var pickerData: [String] = [String]()
     var dataChannelName = ""
+    var lowerBound = 0.0
+    var upperBound = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,9 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
+        
+        lowerBoundSlider.isContinuous = false
+        upperBoundSlider.isContinuous = false
         
         let realm = try! Realm()
         let dataSet = realm.objects(DataSet.self).first // Update this for when we have multiple datasets
@@ -77,8 +84,8 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         let dataChannels = timeSet?.dataChannels.filter("name == '\(dataChannelName)'")
         let dataChannel = dataChannels?.first // this works but it's shitty
         
-        var latMin = 180.0
-        var latMax = -180.0
+        var latMin = 90.0
+        var latMax = -90.0
         var lonMin = 180.0
         var lonMax = -180.0
         var altMin = Double.infinity
@@ -126,6 +133,14 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         print(altMin)
         print(altMax)*/
         
+        lowerBoundSlider.minimumValue = Float(valMin)
+        lowerBoundSlider.maximumValue = Float(valMax)
+        upperBoundSlider.minimumValue = Float(valMin)
+        upperBoundSlider.maximumValue = Float(valMax)
+        
+        //lowerBoundSlider.value = Float(valMin)
+        //upperBoundSlider.value = Float(valMax)
+        
         for dataPoint in (dataChannel?.dataPoints)! {
             let lat = dataPoint.lat
             let lon = dataPoint.lon
@@ -136,14 +151,17 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
             var ARlon = 0.0 // Local longitude coordinates in AR space
             var ARalt = 0.0 // Local altitude coordinates in AR space
             
-            let scaling = 1000.0
+            let scaling = 500.0
+            
+            let latScaling = scaling // because lat goes from -90 to 90
+            let lonScaling = scaling * 2
             let altScaling = 0.01
             
-            ARlat = (lat - latMin) * scaling
-            ARlon = (lon - lonMin) * scaling
+            ARlat = (lat - latMin) * latScaling
+            ARlon = (lon - lonMin) * lonScaling
             ARalt = alt * altScaling
             
-            let HSB = map(value: Float(val), minDomain: 0.35, maxDomain: 0.0, minRange: Float(valMin), maxRange: Float(valMax)).clamped(to: 0.0...0.35) // 300 - 700 for CO2
+            let HSB = map(value: Float(val), minDomain: 0.35, maxDomain: 0.0, minRange: Float(lowerBound), maxRange: Float(upperBound)).clamped(to: 0.0...0.35) // 300 - 700 for CO2
             
             let box = SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0)
             box.firstMaterial?.diffuse.contents = UIColor(
@@ -173,6 +191,18 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         dataChannelName = pickerData[row]
         print("Loading new data channel: \(dataChannelName)")
+        updateARData()
+    }
+    
+    @IBAction func lowerBoundSliderChanged(_ sender: Any) {
+        lowerBound = Double(lowerBoundSlider.value)
+        lowerBoundLabel.text = "Lower bound: \(lowerBound)"
+        updateARData()
+    }
+    
+    @IBAction func upperBoundSliderChanged(_ sender: Any) {
+        upperBound = Double(upperBoundSlider.value)
+        upperBoundLabel.text = "Upper bound: \(upperBound)"
         updateARData()
     }
     

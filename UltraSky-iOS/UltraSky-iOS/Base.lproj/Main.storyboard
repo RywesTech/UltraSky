@@ -325,20 +325,26 @@
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dSx-DB-a5b">
                                                     <rect key="frame" x="6" y="731" width="248" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="upperBoundSliderChanged:" destination="YOp-2O-lTn" eventType="valueChanged" id="WvL-JQ-Tkw"/>
+                                                    </connections>
                                                 </slider>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="HHb-r6-9lI">
                                                     <rect key="frame" x="6" y="674" width="248" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="lowerBoundSliderChanged:" destination="YOp-2O-lTn" eventType="valueChanged" id="52Z-c1-RZp"/>
+                                                    </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lower bound:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ox9-gt-CyU">
-                                                    <rect key="frame" x="14" y="645" width="104" height="21"/>
+                                                    <rect key="frame" x="14" y="645" width="238" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upper bound:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2a7-5h-vDR">
-                                                    <rect key="frame" x="10" y="702" width="106" height="21"/>
+                                                    <rect key="frame" x="10" y="702" width="242" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -357,8 +363,10 @@
                     </view>
                     <connections>
                         <outlet property="ARView" destination="Crl-AV-vKL" id="bU9-mJ-KHH"/>
+                        <outlet property="lowerBoundLabel" destination="ox9-gt-CyU" id="jDa-ux-KKe"/>
                         <outlet property="lowerBoundSlider" destination="HHb-r6-9lI" id="uc0-hl-YWL"/>
                         <outlet property="pickerView" destination="Hdv-Gf-Cdo" id="1g1-Hy-TEa"/>
+                        <outlet property="upperBoundLabel" destination="2a7-5h-vDR" id="ysP-Ba-6kd"/>
                         <outlet property="upperBoundSlider" destination="dSx-DB-a5b" id="mxD-az-lKf"/>
                     </connections>
                 </viewController>
