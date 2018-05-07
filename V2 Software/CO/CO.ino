@@ -1,10 +1,10 @@
 #include <Wire.h>
 
-#define LED 13
+#define LED 12
 #define THIS_ADDRESS 0x15
 #define MASTER_ADDRESS 0x8
 
-const int sensorPin = A0;
+const int sensorPin = A3;
 
 int COLevel = 0;
 String deviceType = "sen"; // Sensor

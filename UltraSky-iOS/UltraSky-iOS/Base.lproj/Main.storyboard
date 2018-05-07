@@ -241,10 +241,10 @@
             </objects>
             <point key="canvasLocation" x="161.71875" y="341.40625"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Data Visualization-->
         <scene sceneID="224-le-F5U">
             <objects>
-                <viewController id="YOp-2O-lTn" customClass="DetailViewController" customModule="UltraSky_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Data Visualization" id="YOp-2O-lTn" customClass="DetailViewController" customModule="UltraSky_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AAl-1t-QtE">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -374,36 +374,53 @@
             </objects>
             <point key="canvasLocation" x="940.42968749999989" y="340.625"/>
         </scene>
-        <!--View Controller-->
+        <!--New Data Set-->
         <scene sceneID="lKs-m9-VHO">
             <objects>
-                <viewController id="bd0-Wk-QIx" sceneMemberID="viewController">
+                <viewController title="New Data Set" id="bd0-Wk-QIx" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RQb-Hn-xXm">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRh-ak-1Zm">
-                                <rect key="frame" x="404" y="416" width="216" height="30"/>
+                                <rect key="frame" x="395" y="425" width="235" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create New Data Set From CSV"/>
+                                <color key="backgroundColor" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Load From CSV">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <segue destination="Wuz-kE-D05" kind="show" id="bt2-pg-faN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aW-7B-CyC">
-                                <rect key="frame" x="440" y="301" width="145" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObI-Ed-Ug0">
+                                <rect key="frame" x="395" y="350" width="235" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Start New Free Flight"/>
-                                <connections>
-                                    <segue destination="zSv-rN-Spr" kind="show" id="dAf-C4-H9e"/>
-                                </connections>
+                                <color key="backgroundColor" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Start Guided Flight">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qK-8m-LxH">
-                                <rect key="frame" x="427" y="525" width="171" height="30"/>
+                                <rect key="frame" x="395" y="500" width="235" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Load From Core SD Card"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Load From SD Card">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <segue destination="JyM-C4-0mR" kind="show" id="ch2-6p-esH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aW-7B-CyC">
+                                <rect key="frame" x="395" y="275" width="235" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Start Free Flight">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="zSv-rN-Spr" kind="show" id="dAf-C4-H9e"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -413,7 +430,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Jg-pJ-2XW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="1116"/>
+            <point key="canvasLocation" x="939.84374999999989" y="1115.625"/>
         </scene>
         <!--Load CoreSD Data View Controller-->
         <scene sceneID="f4l-GL-VQD">
@@ -504,7 +521,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AiP-HT-YKr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="230" y="2070"/>
+            <point key="canvasLocation" x="614" y="1930"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="K3n-X3-TXO">

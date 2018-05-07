@@ -1,3 +1,5 @@
+//Compiles on 1.6.5 just fine
+
 #include <Wire.h>
 #include <SPI.h>
 #include "Adafruit_BLE_UART.h"
@@ -5,8 +7,8 @@
 #include "FlexCAN.h"
 
 #define ADAFRUITBLE_REQ 10
-#define ADAFRUITBLE_RDY 2     // This should be an interrupt pin, on Uno thats #2 or #3
-#define ADAFRUITBLE_RST 9
+#define ADAFRUITBLE_RDY 9 // 2
+#define ADAFRUITBLE_RST 8 // 9
 
 Adafruit_BLE_UART BTLEserial = Adafruit_BLE_UART(ADAFRUITBLE_REQ, ADAFRUITBLE_RDY, ADAFRUITBLE_RST);
 
