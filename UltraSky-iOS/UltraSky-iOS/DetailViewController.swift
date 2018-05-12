@@ -24,6 +24,7 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
     var dataChannelName = ""
     var lowerBound = 0.0
     var upperBound = 0.0
+    var map = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,10 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         
         dataChannelName = pickerData[0]
         updateARData()
+        
+        if let url = URL(string: "https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=16&size=640x640&maptype=satellite&key=AIzaSyCK7pgcmASA1jOSBCCzXdc060NruX98CP4") {
+            downloadImage(url: url)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +82,8 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         ARView.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
+        
+        addMapToARView()
         
         let realm = try! Realm()
         let dataSet = realm.objects(DataSet.self).first // Update this for when we have multiple datasets
@@ -129,9 +136,9 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         print(latMin)
         print(latMax)
         print(lonMin)
-        print(lonMax)
+        print(lonMax)*/
         print(altMin)
-        print(altMax)*/
+        print(altMax)
         
         lowerBoundSlider.minimumValue = Float(valMin)
         lowerBoundSlider.maximumValue = Float(valMax)
@@ -159,7 +166,7 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
             
             ARlat = (lat - latMin) * latScaling
             ARlon = (lon - lonMin) * lonScaling
-            ARalt = alt * altScaling
+            ARalt = (alt - altMin) * altScaling
             
             let HSB = map(value: Float(val), minDomain: 0.35, maxDomain: 0.0, minRange: Float(lowerBound), maxRange: Float(upperBound)).clamped(to: 0.0...0.35) // 300 - 700 for CO2
             
@@ -173,6 +180,8 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
             let boxNode = SCNNode(geometry: box)
             boxNode.position = SCNVector3(ARlat, ARalt, ARlon)  // y-axis runs paralell to gravity
             ARView.scene.rootNode.addChildNode(boxNode)
+            
+            addOriginNode();
         }
     }
     
@@ -210,6 +219,54 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
     
     func map(value:Float, minDomain:Float, maxDomain:Float, minRange:Float, maxRange:Float) -> Float { // Map one rangle of values to another
         return minDomain + (maxDomain - minDomain) * (value - minRange) / (maxRange - minRange)
+    }
+    
+    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            completion(data, response, error)
+            }.resume()
+    }
+    
+    func downloadImage(url: URL) {
+        print("Download Started")
+        getDataFromUrl(url: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() {
+                // self.imageView.image = UIImage(data: data)
+                // completed
+                
+                self.map = UIImage(data: data)!
+                //self.addMapToARView()
+                self.updateARData()
+            }
+        }
+    }
+    
+    func addMapToARView() {
+        let plane = SCNPlane(width: 1, height: 1)
+        
+        let material = SCNMaterial()
+        material.diffuse.contents = map
+        plane.materials = [material]
+        
+        let planeNode = SCNNode(geometry: plane)
+        planeNode.position = SCNVector3(0,0,0) //(1,-0.45,-0.08)
+        planeNode.scale = SCNVector3(1,1,1) //2,2,2
+        planeNode.eulerAngles = SCNVector3(-1.5708,0,0) //(-1.5708,-0.15,0)
+        
+        self.ARView.scene.rootNode.addChildNode(planeNode)
+        print("image downloaded and inserted")
+    }
+    
+    func addOriginNode() {
+        let box = SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0)
+        box.firstMaterial?.diffuse.contents = UIColor(red: 0, green: 0, blue: 1, alpha: 1)
+        box.firstMaterial?.isDoubleSided = true
+        let boxNode = SCNNode(geometry: box)
+        boxNode.position = SCNVector3(0, 0, 0)  // y-axis runs paralell to gravity
+        ARView.scene.rootNode.addChildNode(boxNode)
     }
 }
 

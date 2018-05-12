@@ -19,6 +19,7 @@
 		94295A201FF87A6D00466F40 /* location (2).gpx in Resources */ = {isa = PBXBuildFile; fileRef = 94295A1F1FF87A6D00466F40 /* location (2).gpx */; };
 		942DBB3B209BEE7100FF2B35 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942DBB3A209BEE7100FF2B35 /* DataSet.swift */; };
 		944028DC209ACA04009358F0 /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 944028DB209ACA04009358F0 /* data.csv */; };
+		9467667A20A6919A0029FEC5 /* AdjustHeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467667920A6919A0029FEC5 /* AdjustHeightViewController.swift */; };
 		947825CB200BDEE30026701A /* BLECentralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CA200BDEE20026701A /* BLECentralViewController.swift */; };
 		947825CD200BDF080026701A /* PeripheralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CC200BDF080026701A /* PeripheralTableViewCell.swift */; };
 		947825CF200BDF2F0026701A /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947825CE200BDF2F0026701A /* UUIDKey.swift */; };
@@ -63,6 +64,7 @@
 		94295A1F1FF87A6D00466F40 /* location (2).gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "location (2).gpx"; sourceTree = "<group>"; };
 		942DBB3A209BEE7100FF2B35 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
 		944028DB209ACA04009358F0 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.csv; sourceTree = "<group>"; };
+		9467667920A6919A0029FEC5 /* AdjustHeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustHeightViewController.swift; sourceTree = "<group>"; };
 		947825CA200BDEE20026701A /* BLECentralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLECentralViewController.swift; sourceTree = "<group>"; };
 		947825CC200BDF080026701A /* PeripheralTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralTableViewCell.swift; sourceTree = "<group>"; };
 		947825CE200BDF2F0026701A /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				948279B8209BF64A001E3154 /* CSVToDBViewController.swift */,
 				948279BB209D77DC001E3154 /* RealTimeViewController.swift */,
 				948279BF209E6DCD001E3154 /* LoadCoreSDDataViewController.swift */,
+				9467667920A6919A0029FEC5 /* AdjustHeightViewController.swift */,
 				9421D3541FF5A9A700992E4E /* Main.storyboard */,
 				9421D3571FF5A9A700992E4E /* Assets.xcassets */,
 				9421D3591FF5A9A700992E4E /* LaunchScreen.storyboard */,
@@ -250,6 +253,7 @@
 				94BFFCDE209561E20096968A /* HomeCollectionViewController.swift in Sources */,
 				948279B5209BF3E5001E3154 /* DataPoint.swift in Sources */,
 				948279B7209BF454001E3154 /* DataChannel.swift in Sources */,
+				9467667A20A6919A0029FEC5 /* AdjustHeightViewController.swift in Sources */,
 				942DBB3B209BEE7100FF2B35 /* DataSet.swift in Sources */,
 				947825D1200BE02F0026701A /* UartModuleViewController.swift in Sources */,
 				947825CD200BDF080026701A /* PeripheralTableViewCell.swift in Sources */,
