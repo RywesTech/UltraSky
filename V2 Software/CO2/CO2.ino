@@ -1,5 +1,5 @@
-#include <Wire.h>
 #include "SparkFunCCS811.h"
+#include "Wire.h"
 
 #define LED 13
 #define THIS_ADDRESS 0x9
@@ -24,28 +24,28 @@ void setup() {
 
   Wire.begin(THIS_ADDRESS);
   Wire.onReceive(receiveEvent);
-  
-    CCS811Core::status returnCode = CO2Sensor.beginCore();
-    Serial.print("beginCore exited with: ");
-    switch ( returnCode ) {
-      case CCS811Core::SENSOR_SUCCESS:
-        Serial.print("SUCCESS");
-        break;
-      case CCS811Core::SENSOR_ID_ERROR:
-        Serial.print("ID_ERROR");
-        break;
-      case CCS811Core::SENSOR_I2C_ERROR:
-        Serial.print("I2C_ERROR");
-        break;
-      case CCS811Core::SENSOR_INTERNAL_ERROR:
-        Serial.print("INTERNAL_ERROR");
-        break;
-      case CCS811Core::SENSOR_GENERIC_ERROR:
-        Serial.print("GENERIC_ERROR");
-        break;
-      default:
-        Serial.print("Unspecified error.");
-    }
+
+  CCS811Core::status returnCode = CO2Sensor.beginCore();
+  Serial.print("beginCore exited with: ");
+  switch ( returnCode ) {
+    case CCS811Core::SENSOR_SUCCESS:
+      Serial.print("SUCCESS");
+      break;
+    case CCS811Core::SENSOR_ID_ERROR:
+      Serial.print("ID_ERROR");
+      break;
+    case CCS811Core::SENSOR_I2C_ERROR:
+      Serial.print("I2C_ERROR");
+      break;
+    case CCS811Core::SENSOR_INTERNAL_ERROR:
+      Serial.print("INTERNAL_ERROR");
+      break;
+    case CCS811Core::SENSOR_GENERIC_ERROR:
+      Serial.print("GENERIC_ERROR");
+      break;
+    default:
+      Serial.print("Unspecified error.");
+  }
 
   Serial.println("Starting loop...");
 }
@@ -59,7 +59,7 @@ void loop() {
     sendMaster(deviceType, "CO2", String(CO2Level));
     delay(10); // let the bus recover
     sendMaster(deviceType, "TVOC", String(TVOCLevel));
-    
+
   }
 
   if (CO2Sensor.dataAvailable()) {
@@ -92,7 +92,7 @@ void receiveEvent(int howMany) {
 }
 
 // Device Type: sen (sensor)
-// Key: CO (Carbon monoxide)
+// Key: CO2 (Carbon dioxide)
 // Value: value of sensor
 void sendMaster(String deviceType, String key, String value) {
   digitalWrite(LED, HIGH);
@@ -108,7 +108,7 @@ void sendMaster(String deviceType, String key, String value) {
   data.toCharArray(dataBuff, dataLength);
 
   Serial.println("Begining to send...");
-  
+
   Wire.beginTransmission(MASTER_ADDRESS);
   Wire.write(dataBuff);
   Wire.endTransmission();

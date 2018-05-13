@@ -12,7 +12,9 @@
 
 Adafruit_BLE_UART BTLEserial = Adafruit_BLE_UART(ADAFRUITBLE_REQ, ADAFRUITBLE_RDY, ADAFRUITBLE_RST);
 
-#define LED 13
+#define LED_R 22
+#define LED_G 21
+#define LED_B 20
 
 #define THIS_ADDRESS 0x11
 #define MASTER_ADDRESS 0x8
@@ -29,10 +31,10 @@ char dateTime[20];
 uint32_t messageId;
 
 void setup() {
+  startupLEDTest();
+  
   Serial.begin(9600);
   Serial.println("Booting...");
-  pinMode(LED, OUTPUT);
-  digitalWrite(LED, LOW);
 
   // Begin I2C:
   Wire.begin(THIS_ADDRESS);
@@ -219,9 +221,9 @@ void receiveEvent(int howMany) {
 // Key: key
 // Value: value of key
 void sendMaster(String deviceType, String key, String value) {
-  digitalWrite(LED, HIGH);
+  digitalWrite(LED_G, HIGH);
   delay(100);
-  digitalWrite(LED, LOW);
+  digitalWrite(LED_G, LOW);
 
   String data = deviceType + "-" + key + ":" + value;
   int dataLength = data.length() + 1;
@@ -230,8 +232,10 @@ void sendMaster(String deviceType, String key, String value) {
 
   char dataBuff[dataLength];
   data.toCharArray(dataBuff, dataLength);
-
+  
   Serial.println("Begining to send...");
+
+  Serial.println(sizeof(dataBuff));
 
   Wire.beginTransmission(MASTER_ADDRESS);
   Wire.write(dataBuff);
@@ -255,5 +259,39 @@ String getVal(String data, char separator, int index) {
   }
 
   return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
+
+void startupLEDTest() {
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+
+  analogWrite(LED_R, 0);
+  analogWrite(LED_G, 0);
+  analogWrite(LED_B, 0);
+
+  analogWrite(LED_R, 255);
+  delay(300);
+  analogWrite(LED_R, 0);
+
+  analogWrite(LED_G, 255);
+  delay(300);
+  analogWrite(LED_G, 0);
+
+  analogWrite(LED_B, 255);
+  delay(300);
+  analogWrite(LED_B, 0);
+
+  analogWrite(LED_R, 255);
+  delay(300);
+  analogWrite(LED_R, 0);
+
+  analogWrite(LED_G, 255);
+  delay(300);
+  analogWrite(LED_G, 0);
+
+  analogWrite(LED_B, 255);
+  delay(300);
+  analogWrite(LED_B, 0);
 }
 

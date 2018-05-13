@@ -1,11 +1,11 @@
 #include <Wire.h>
 #include <SD.h>
 #include <SPI.h>
+//#include "SparkFunCCS811.h"
 
 #define LED_R 22
 #define LED_G 21
 #define LED_B 20
-#define BUTTON 10
 
 #define THIS_ADDRESS 0x8
 #define OTHER_ADDRESS 0x9
@@ -24,16 +24,16 @@ long interval1Hz = 1000;
 
 const int SD_CS = 10;
 
+//#define CCS811_ADDR 0x5B //Default I2C Address
+//CCS811 CO2Sensor(CCS811_ADDR);
+
 void setup() {
   delay(1000); // slow down for serial monitor
   Serial.begin(9600);
   Serial.println("starting up!");
 
-  initLED();
+  startupLEDTest();
   modeError(); // Error unless otherwise stated
-
-  pinMode(BUTTON, INPUT);
-  digitalWrite(BUTTON, HIGH);
 
   Wire.begin(THIS_ADDRESS);
   Wire.setSDA(18);
@@ -55,11 +55,35 @@ void setup() {
     dataFile.close();
   } else {
     Serial.println(F("ERROR: opening datalog.txt"));
-    //while(1);
+    while(1);
   }
-  Serial.print(F("File ready to datalog to!"));
+  //Serial.print(F("File ready to datalog to!"));
+  /*
+  CCS811Core::status returnCode = CO2Sensor.beginCore();
+  Serial.print("beginCore exited with: ");
+  switch ( returnCode ) {
+    case CCS811Core::SENSOR_SUCCESS:
+      Serial.print("SUCCESS");
+      break;
+    case CCS811Core::SENSOR_ID_ERROR:
+      Serial.print("ID_ERROR");
+      break;
+    case CCS811Core::SENSOR_I2C_ERROR:
+      Serial.print("I2C_ERROR");
+      break;
+    case CCS811Core::SENSOR_INTERNAL_ERROR:
+      Serial.print("INTERNAL_ERROR");
+      break;
+    case CCS811Core::SENSOR_GENERIC_ERROR:
+      Serial.print("GENERIC_ERROR");
+      break;
+    default:
+      Serial.print("Unspecified error.");
+  }*/
 
   modeGood();
+
+  datalogging = true;
   Serial.println("starting loop!");
 }
 
@@ -102,8 +126,6 @@ void receiveEvent(int howMany) {
 
   Serial.println("Key: " + key + ", value: " + value);
 
-  Serial.println();
-
   if (key == "com-datalog") {
     if (value == "start") {
       datalogging = true;
@@ -126,8 +148,6 @@ void receiveEvent(int howMany) {
 
   } else if (key == "sen-CO") {
     CO = value.toFloat();
-    Serial.println("raw val: " + value);
-    Serial.println("CO val: " + String(CO));
 
   } else if (key == "sen-CO2") {
     CO2 = value.toFloat();
@@ -136,8 +156,10 @@ void receiveEvent(int howMany) {
     TVOC = value.toFloat();
 
   } else {
-    Serial.println("Unknown key");
+    Serial.println("ERROR: Unknown key");
   }
+
+  Serial.println();
 
 }
 
@@ -158,13 +180,37 @@ String getVal(String data, char separator, int index) {
   return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
 
-void initLED() {
+void startupLEDTest() {
   pinMode(LED_R, OUTPUT);
   pinMode(LED_G, OUTPUT);
   pinMode(LED_B, OUTPUT);
 
   analogWrite(LED_R, 0);
   analogWrite(LED_G, 0);
+  analogWrite(LED_B, 0);
+
+  analogWrite(LED_R, 255);
+  delay(300);
+  analogWrite(LED_R, 0);
+
+  analogWrite(LED_G, 255);
+  delay(300);
+  analogWrite(LED_G, 0);
+
+  analogWrite(LED_B, 255);
+  delay(300);
+  analogWrite(LED_B, 0);
+
+  analogWrite(LED_R, 255);
+  delay(300);
+  analogWrite(LED_R, 0);
+
+  analogWrite(LED_G, 255);
+  delay(300);
+  analogWrite(LED_G, 0);
+
+  analogWrite(LED_B, 255);
+  delay(300);
   analogWrite(LED_B, 0);
 }
 

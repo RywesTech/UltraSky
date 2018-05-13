@@ -55,6 +55,8 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         dataChannelName = pickerData[0]
         updateARData()
         
+        updateBoundsScaling()
+        
         if let url = URL(string: "https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=16&size=640x640&maptype=satellite&key=AIzaSyCK7pgcmASA1jOSBCCzXdc060NruX98CP4") {
             downloadImage(url: url)
         }
@@ -145,14 +147,14 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
         upperBoundSlider.minimumValue = Float(valMin)
         upperBoundSlider.maximumValue = Float(valMax)
         
-        //lowerBoundSlider.value = Float(valMin)
-        //upperBoundSlider.value = Float(valMax)
-        
         for dataPoint in (dataChannel?.dataPoints)! {
-            let lat = dataPoint.lat
-            let lon = dataPoint.lon
+            var lat = dataPoint.lat
+            var lon = dataPoint.lon
             let alt = dataPoint.alt
             let val = dataPoint.value
+            
+            lat = lat - ((latMax - latMin) / 2)
+            lon = lon - ((lonMax - lonMin) / 2)
             
             var ARlat = 0.0 // Local latitude coordinates in AR space
             var ARlon = 0.0 // Local longitude coordinates in AR space
@@ -204,18 +206,24 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
     }
     
     @IBAction func lowerBoundSliderChanged(_ sender: Any) {
-        lowerBound = Double(lowerBoundSlider.value)
-        lowerBoundLabel.text = "Lower bound: \(lowerBound)"
+        updateBoundsScaling()
         updateARData()
     }
     
     @IBAction func upperBoundSliderChanged(_ sender: Any) {
-        upperBound = Double(upperBoundSlider.value)
-        upperBoundLabel.text = "Upper bound: \(upperBound)"
+        updateBoundsScaling()
         updateARData()
     }
     
     // MARK: - Utility Functions
+    
+    func updateBoundsScaling() { //updateARData() still needs to get called after this func runs
+        lowerBound = Double(lowerBoundSlider.value)
+        lowerBoundLabel.text = "Lower bound: \(lowerBound)"
+        
+        upperBound = Double(upperBoundSlider.value)
+        upperBoundLabel.text = "Upper bound: \(upperBound)"
+    }
     
     func map(value:Float, minDomain:Float, maxDomain:Float, minRange:Float, maxRange:Float) -> Float { // Map one rangle of values to another
         return minDomain + (maxDomain - minDomain) * (value - minRange) / (maxRange - minRange)
@@ -234,11 +242,8 @@ class DetailViewController: UIViewController, ARSCNViewDelegate, UIPickerViewDel
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
             DispatchQueue.main.async() {
-                // self.imageView.image = UIImage(data: data)
-                // completed
                 
                 self.map = UIImage(data: data)!
-                //self.addMapToARView()
                 self.updateARData()
             }
         }
