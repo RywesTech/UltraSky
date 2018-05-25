@@ -54,6 +54,12 @@ class HomeCollectionViewController: UICollectionViewController {
         
         print("loading cell")
         
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = documentsURL.appendingPathComponent("test-map.png").path
+        if FileManager.default.fileExists(atPath: filePath) {
+            cell.icon.image = UIImage(contentsOfFile: filePath)
+        }
+        
         //cell.nameLabel.text = "test"
         cell.nameLabel.text = collectionData[indexPath.row].name
     

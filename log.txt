@@ -1,3 +1,117 @@
+commit 33751f3dacb40db9f8f9d224a7062b294467459b
+Author: rywesTech <ryan@westcott.email>
+Date:   Sun May 13 10:59:25 2018 -0700
+
+    About to add code for scaling, revert back to here to remove scaling code. Also, decided not to incorperate CO2 into Core.
+
+commit 8075856e3146104f0b597054726e5a30989010bd
+Author: rywesTech <ryan@westcott.email>
+Date:   Fri May 11 20:30:29 2018 -0700
+
+    Added code to adjust the height of the data points (because my test data didnt have a calibrated alitimeter so I fixed that in post) and added code to retreive an image from google earth but it's only in the prototype stage
+
+commit 0616c66d2c0ab3cbb1c5b9386cdaf55d2f9ad580
+Author: rywesTech <ryan@westcott.email>
+Date:   Fri May 11 19:27:57 2018 -0700
+
+    saved com module PCB design
+
+commit c1419f7a0d95ca870573bb64459335b1ae2e5e6a
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu May 10 11:27:59 2018 -0700
+
+    Added PCB files
+
+commit 8196cf7e38f8aef37f8a5afc8ef6b1a698af4b67
+Author: rywesTech <ryan@westcott.email>
+Date:   Sun May 6 18:31:45 2018 -0700
+
+    Added schematics for Core and Communication boards. also changed some pins in code for bluetooth.
+
+commit 4601e1677b5afd15d967bbf5e258b04eb7ac2582
+Author: rywesTech <ryan@westcott.email>
+Date:   Sun May 6 13:50:40 2018 -0700
+
+    Exported MQ sensor PCB, worked on CO2 sensor code (working now), and worked on other random things
+
+commit 3e9035ba08a2ac2794ec74aedd6d200734b72a97
+Author: rywesTech <ryan@westcott.email>
+Date:   Sat May 5 20:18:30 2018 -0700
+
+    worked on visulisation, communication, and added icons
+
+commit 26e91b2f0be9e6bad0dfa358c105564397951841
+Author: rywesTech <ryan@westcott.email>
+Date:   Sat May 5 15:09:05 2018 -0700
+
+    Worked on com code and everything
+
+commit 1d8c614fcb1032d9afd73b0417c77775fdc51707
+Author: rywesTech <ryan@westcott.email>
+Date:   Fri May 4 13:56:37 2018 -0700
+
+    Worked on visulisation code
+
+commit 2342476042f08df34abca91efc6ecacdb23c9317
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu May 3 21:59:49 2018 -0700
+
+    Worked on visulisation and model code
+
+commit 1a2c58f05b26d3c4d52bff41cb4569beffc5bc3d
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu May 3 19:02:35 2018 -0700
+
+    Added Realm libraries and DB code
+
+commit 10dfb683ac11ff86431ebcf307ea5cefda821593
+Author: rywesTech <ryan@westcott.email>
+Date:   Thu May 3 08:43:08 2018 -0700
+
+    Worked on ios visulisation code
+
+commit f9e21e39d6ada13ebd877ac98410aabcf2ae86da
+Author: rywesTech <ryan@westcott.email>
+Date:   Tue May 1 19:34:01 2018 -0700
+
+    worked on PCB
+
+commit 6735c0ef2e01abd93c8ec61ae05073066bfa6245
+Author: rywesTech <ryan@westcott.email>
+Date:   Mon Apr 30 21:47:03 2018 -0700
+
+    Worked on PCB and visulisation portion of app
+
+commit c9b816447100be646e5b1e542475f2a9c3182906
+Author: rywesTech <ryan@westcott.email>
+Date:   Sun Apr 29 08:58:10 2018 -0700
+
+    Added ios code for iPad
+
+commit f8062a837589c8defa7709d629b635b6d61fe06d
+Author: rywesTech <ryan@westcott.email>
+Date:   Fri Apr 27 20:19:38 2018 -0700
+
+    worked on core and communication code and started to design the core PCB
+
+commit 3f9cef6c9fed527d0484fbb6e7d7fcdcb423f117
+Author: rywesTech <ryan@westcott.email>
+Date:   Wed Apr 25 22:19:28 2018 -0700
+
+    added SD card code
+
+commit 7a50bc7cee292f19031103b003ab441974826414
+Author: rywesTech <ryan@westcott.email>
+Date:   Wed Apr 25 21:35:25 2018 -0700
+
+    added V2 software
+
+commit 04f4e9f50cbf55af371e8d4aed6f400e5dbfaeab
+Author: rywesTech <ryan@westcott.email>
+Date:   Fri Feb 23 11:04:52 2018 -0800
+
+    modified
+
 commit 7461d3da2c278ea93ee40c5a556f1b14a7e61364
 Author: rywesTech <ryan@westcott.email>
 Date:   Thu Feb 22 15:29:51 2018 -0800
@@ -13,7 +127,7 @@ Date:   Thu Feb 15 13:05:46 2018 -0800
 commit 4d62bd6b99cab6510dc664e4b6dd1697509a2434
 Author: rywesTech <ryan@westcott.email>
 Date:   Sun Feb 11 17:57:08 2018 -0800
-
+ 
     correct rendering data
 
 commit d946b94b4cd0ac7a225a55d05175925838195a98
